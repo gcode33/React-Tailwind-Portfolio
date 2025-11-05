@@ -1,0 +1,33 @@
+import { Navbar } from "../components/Navbar"
+import { ThemeToggle } from "../components/ThemeToggle"
+import { HeroSection } from "../components/HeroSection"
+import { AboutSection } from "../components/AboutSection"
+import {StarBackground} from "@/components/StarBackground"
+import { SkillsSection } from "../components/SkillsSection"
+import { ProjectSection } from "../components/ProjectSection"
+import { ContactSection } from "../components/ContactSection"
+import { Contact } from "lucide-react"  
+import { Footer } from "../components/Footer";
+export const Home = () => {
+  return (
+    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+        {/*theme toggle*/}
+        <ThemeToggle />
+        {/*background effects*/}
+        <StarBackground />
+
+        {/* navbar */}
+        <Navbar />
+
+        {/* main section */}
+        <main>
+          <HeroSection/>
+          <AboutSection/>
+          <SkillsSection/>
+          <ProjectSection/>
+          <ContactSection/>
+        </main>
+  <Footer />
+    </div>
+  )
+}
