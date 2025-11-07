@@ -14,13 +14,13 @@ export const AboutSection = () => {
           <div className="space-y-6">
             <h3 className="text-2xl font-semibold">Passionate Software Developer</h3>
 
-            <p className="text-muted-foreground">
-              With my professional experience as a software developer...
-            </p>
+              <p className="text-muted-foreground">
+                With my professional experience as a software developer, I have developed a strong foundation in building robust and scalable applications. My journey has allowed me to work with a variety of technologies and collaborate with talented teams to deliver impactful solutions.
+              </p>
 
-            <p className="text-muted-foreground">
-              I am passionate about...
-            </p>
+              <p className="text-muted-foreground">
+                I am passionate about data analytics and coding in general. I love exploring data to uncover meaningful insights and trends that drive better decision-making. Coding excites me because it allows me to solve complex problems, automate tasks, and continuously learn new skills. Whether it's developing full-stack applications or analyzing datasets, I enjoy the challenge and creativity that comes with software development and data analytics.
+              </p>
 
             <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center">
               <a href="#contact" className="cosmic-button">
