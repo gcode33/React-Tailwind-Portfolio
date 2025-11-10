@@ -13,7 +13,7 @@ const projects = [
         id: 2,
         title: "City of Toronto Event Finder",
         description: "A web application to find events in the city of Toronto using React for the frontend and Node.js for the backend and The city of Toronto's public API to fetch event data.",
-        image: "/projects/Screenshot 2025-11-16 113222.png",
+        image: "/projects/Screenshot 2025-11-10 113222.png",
         tags: ["React", "Node.js", "API"],
         githubUrl: "https://github.com/gcode33/Toronto-Event-finder"
     }
