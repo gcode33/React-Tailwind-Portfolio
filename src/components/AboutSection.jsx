@@ -27,7 +27,7 @@ export const AboutSection = () => {
                 Get In Touch
               </a>
               <a
-                href="C:\Users\georg\Portforlio_Website\public\GeorgeFotabongJr_CV.pdf"
+                href="/GeorgeFotabongJr_CV.pdf"
                 download="GeorgeFotabongJr_CV.pdf"
                 className="px-6 py-2 rounded-full border border-primary text-primary hover:bg-primary/10 transition-colors duration-300"
               >
