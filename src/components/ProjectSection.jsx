@@ -16,6 +16,14 @@ const projects = [
         image: "/projects/Screenshot 2025-11-10 113222.png",
         tags: ["React", "Node.js", "API"],
         githubUrl: "https://github.com/gcode33/Toronto-Event-finder"
+    },
+    {
+        id: 2,
+        title: "Market Sentiment & Sector Trend Analyzer",
+        description: "A local, data-driven system that ingests real-time financial news and market data, applies NLP sentiment analysis, and aggregates results to identify trends at the sector and industry level.",
+        image: "",
+        tags: ["React", "Node.js", "API"],
+        githubUrl: "https://github.com/gcode33/Toronto-Event-finder"
     }
 ]
 
