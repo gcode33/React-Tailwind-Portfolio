@@ -23,7 +23,7 @@ const projects = [
         description: "A local, data-driven system that ingests real-time financial news and market data, applies NLP sentiment analysis, and aggregates results to identify trends at the sector and industry level.",
         image: "",
         tags: ["Python", "pandas", "API", "numpy","HuggingFace","NLP","SQLite","SQLAlchemy"],
-        githubUrl: "https://github.com/gcode33/Toronto-Event-finder"
+        githubUrl: "https://github.com/gcode33/market-intel"
     }
 ]
 
