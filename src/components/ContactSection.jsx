@@ -1,46 +1,74 @@
-import { Contact2, Mail, Phone, MapPin, Linkedin } from "lucide-react";
+import { useState } from "react";
+import { Check, Copy, Github, Linkedin, Mail, Phone } from "lucide-react";
+import { Reveal } from "./Reveal";
+import { profile } from "@/data/profile";
+
+const links = [
+  { label: "LinkedIn", href: profile.linkedin, icon: Linkedin },
+  { label: "GitHub", href: profile.github, icon: Github },
+  { label: profile.phone, href: profile.phoneHref, icon: Phone },
+];
 
 export const ContactSection = () => {
-    return (
-        <section id="contact" className="py-24 px-4 flex items-center justify-center min-h-[60vh]">
-            <div className="max-w-xl w-full text-center flex flex-col items-center justify-center">
-                <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                    Get in <span className="text-primary">Touch</span>
-                </h2>
-                <p className="text-muted-foreground mb-12 max-w-2xl mx-auto">
-                    I'm always open to discussing new projects and ideas.
-                </p>
-                <div className="space-y-8 w-full flex flex-col items-center">
-                    <h3 className="text-lg font-semibold text-foreground">Contact Information</h3>
-                    <div className="flex flex-col space-y-4">
-                        <div className="flex items-center space-x-3 justify-center">
-                            <Mail className="text-muted-foreground" />
-                            <a href="mailto:FotabongGeorgeJr@gmail.com" className="text-foreground hover:underline">
-                                FotabongGeorgeJr@gmail.com
-                            </a>
-                        </div>
-                        <div className="flex items-center space-x-3 justify-center">
-                            <Phone className="text-muted-foreground" />
-                            <a href="tel:+12899370842" className="text-foreground hover:underline">
-                                +1 (289) 937-0842
-                            </a>
-                        </div>
-                        <div className="flex items-center space-x-3 justify-center">
-                            <MapPin className="text-muted-foreground" />
-                            <span className="text-foreground">Toronto, Canada</span>
-                        </div>
-                    </div>
-                    <div className="mt-8">
-                        <h3 className="text-lg font-semibold text-foreground mb-2">Connect with me</h3>
-                        <div className="flex items-center space-x-3 justify-center">
-                            <Linkedin className="text-muted-foreground" />
-                            <a target="_blank" href="https://www.linkedin.com/in/george-fotabong-b10b92202/" rel="noopener noreferrer" className="text-foreground hover:underline">
-                                linkedin.com/in/george-fotabong-b10b92202
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    );
+  const [copied, setCopied] = useState(false);
+
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(profile.email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      window.location.href = `mailto:${profile.email}`;
+    }
+  };
+
+  return (
+    <section id="contact" className="py-24 md:py-32">
+      <div className="container">
+        <Reveal className="card relative overflow-hidden px-6 py-16 text-center md:px-16 md:py-20">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -top-32 left-1/2 h-72 w-[600px] -translate-x-1/2 rounded-full blur-3xl"
+            style={{ background: "radial-gradient(closest-side, var(--glow), transparent)" }}
+          />
+
+          <p className="relative mb-3 font-mono text-sm text-accent">05. Contact</p>
+          <h2 className="relative text-3xl font-semibold tracking-tight md:text-5xl">Let's work together.</h2>
+          <p className="relative mx-auto mt-4 max-w-lg text-muted">
+            I'm open to software engineering roles and interesting collaborations. The fastest way to
+            reach me is email — I usually reply within a day.
+          </p>
+
+          <div className="relative mt-8 flex flex-wrap items-center justify-center gap-3">
+            <a href={`mailto:${profile.email}`} className="btn-primary">
+              <Mail className="h-4 w-4" />
+              {profile.email}
+            </a>
+            <button onClick={copyEmail} className="btn-ghost" aria-label="Copy email address">
+              {copied ? <Check className="h-4 w-4 text-emerald-500" /> : <Copy className="h-4 w-4" />}
+              {copied ? "Copied" : "Copy"}
+            </button>
+          </div>
+
+          <div className="relative mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-muted">
+            {links.map(({ label, href, icon }) => {
+              const Icon = icon;
+              return (
+              <a
+                key={label}
+                href={href}
+                target={href.startsWith("http") ? "_blank" : undefined}
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 transition-colors duration-200 hover:text-foreground"
+              >
+                <Icon className="h-4 w-4" />
+                {label}
+              </a>
+              );
+            })}
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
 };

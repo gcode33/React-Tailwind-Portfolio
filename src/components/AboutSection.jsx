@@ -1,90 +1,61 @@
-import { Briefcase, Code, BarChart } from "lucide-react";
+import { GraduationCap } from "lucide-react";
+import { Reveal } from "./Reveal";
+import { SectionHeading } from "./SectionHeading";
+import { education } from "@/data/profile";
 
-export const AboutSection = () => {
-  return (
-    <section id="about" className="py-24 px-4 relative">
-      <div className="container mx-auto max-w-5xl">
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
-          About <span className="text-primary">Me</span>
-        </h2>
+const stats = [
+  { value: "2022", label: "Shipping production code since" },
+  { value: "3", label: "Companies I've built software for" },
+  { value: "5", label: "Recent projects on GitHub" },
+];
 
-        {/*  Two-column layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          {/* LEFT COLUMN */}
-          <div className="space-y-6">
-            <h3 className="text-2xl font-semibold">Passionate Software Developer</h3>
+export const AboutSection = () => (
+  <section id="about" className="py-24 md:py-32">
+    <div className="container">
+      <SectionHeading index="01" eyebrow="About" title="Pragmatic engineer, careful with the details." />
 
-              <p className="text-muted-foreground">
-                With my professional experience as a software developer, I have developed a strong foundation in building robust and scalable applications. My journey has allowed me to work with a variety of technologies and collaborate with talented teams to deliver impactful solutions.
-              </p>
+      <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr]">
+        <Reveal className="space-y-5 text-lg leading-relaxed text-muted">
+          <p>
+            I'm a software developer based in London, Ontario. Today I work at{" "}
+            <span className="text-foreground">Lynked Inc.</span>, shipping cross-service features
+            and tracking down production defects across NestJS, Next.js, Nuxt and Laravel codebases.
+          </p>
+          <p>
+            Before that I built a .NET and SQL Server configuration platform at Continuum Commerce
+            Solutions, wired automated API fuzz testing and SonarQube quality gates into CI/CD, and
+            spent two years building React and TypeScript interfaces at Rocket Financial.
+          </p>
+          <p>
+            I care about the unglamorous things that make software trustworthy: correct status codes,
+            clean data, real test coverage, and changes that are small enough to review. Outside of
+            work I build with LLMs and data — from resume-driven career roadmaps to market sentiment
+            analysis.
+          </p>
+        </Reveal>
 
-              <p className="text-muted-foreground">
-                I am passionate about data analytics and coding in general. I love exploring data to uncover meaningful insights and trends that drive better decision-making. Coding excites me because it allows me to solve complex problems, automate tasks, and continuously learn new skills. Whether it's developing full-stack applications or analyzing datasets, I enjoy the challenge and creativity that comes with software development and data analytics.
-              </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center">
-              <a href="#contact" className="cosmic-button">
-                Get In Touch
-              </a>
-              <a
-                href="/GeorgeFotabongJr_CV.pdf"
-                download="GeorgeFotabongJr_CV.pdf"
-                className="px-6 py-2 rounded-full border border-primary text-primary hover:bg-primary/10 transition-colors duration-300"
-              >
-                Download CV
-              </a>
-            </div>
+        <div className="space-y-4">
+          <div className="grid grid-cols-3 gap-3">
+            {stats.map((stat, i) => (
+              <Reveal key={stat.label} delay={i * 80} className="card p-4">
+                <p className="text-2xl font-semibold tracking-tight">{stat.value}</p>
+                <p className="mt-1 text-xs leading-snug text-muted">{stat.label}</p>
+              </Reveal>
+            ))}
           </div>
 
-          {/* RIGHT COLUMN */}
-          <div className="grid grid-cols-1 gap-6">
-            {/* CARD 1 */}
-            <div className="gradient-border p-6 card-hover">
-              <div className="flex items-start gap-4">
-                <div className="p-3 rounded-full bg-primary/10 flex items-center justify-center">
-                  <Code className="h-6 w-6 text-primary" />
-                </div>
-                <div>
-                  <h4 className="font-semibold">Full Stack Development</h4>
-                  <p className="text-sm text-muted-foreground">
-                    I love tackling complex challenges with clean, efficient code.
-                  </p>
-                </div>
-              </div>
+          <Reveal delay={240} className="card card-hover flex gap-4 p-5">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-accent/10 text-accent">
+              <GraduationCap className="h-5 w-5" />
             </div>
-
-            {/* CARD 2 */}
-            <div className="gradient-border p-6 card-hover">
-              <div className="flex items-start gap-4">
-                <div className="p-3 rounded-full bg-primary/10 flex items-center justify-center">
-                  <BarChart className="h-6 w-6 text-primary" />
-                </div>
-                <div>
-                  <h4 className="font-semibold">Data Analytics</h4>
-                  <p className="text-sm text-muted-foreground">
-                    I enjoy turning data into actionable insights and visualizations.
-                  </p>
-                </div>
-              </div>
+            <div>
+              <p className="font-medium">{education.degree}</p>
+              <p className="mt-1 text-sm text-muted">{education.school}</p>
+              <p className="mt-2 font-mono text-xs text-muted">{education.period}</p>
             </div>
-
-            {/* CARD 3 */}
-            <div className="gradient-border p-6 card-hover">
-              <div className="flex items-start gap-4">
-                <div className="p-3 rounded-full bg-primary/10 flex items-center justify-center">
-                  <Briefcase className="h-6 w-6 text-primary" />
-                </div>
-                <div>
-                  <h4 className="font-semibold">Continuous Learner</h4>
-                  <p className="text-sm text-muted-foreground">
-                    Always exploring new technologies and refining my craft.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+          </Reveal>
         </div>
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);

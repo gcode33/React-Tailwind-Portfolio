@@ -1,108 +1,147 @@
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
-import { useState, useEffect } from "react";
-// import ThemeToggle from "./ThemeToggle"; // optional
+import { useEffect, useState } from "react";
+import { ThemeToggle } from "./ThemeToggle";
+import { profile } from "@/data/profile";
 
 const navItems = [
-  { name: "home", href: "#hero" },
-  { name: "about", href: "#about" },
-  { name: "skills", href: "#skills" },
-  { name: "projects", href: "#projects" },
-  { name: "contact", href: "#contact" },
+  { name: "About", href: "#about" },
+  { name: "Experience", href: "#experience" },
+  { name: "Projects", href: "#projects" },
+  { name: "Skills", href: "#skills" },
+  { name: "Contact", href: "#contact" },
 ];
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [active, setActive] = useState("");
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
-    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const toggleMenu = () => setIsMenuOpen((prev) => !prev);
+  // Highlight the nav link for whichever section is in the middle of the viewport.
+  useEffect(() => {
+    const sections = navItems
+      .map((item) => document.querySelector(item.href))
+      .filter(Boolean);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActive(`#${entry.target.id}`);
+        });
+      },
+      { rootMargin: "-45% 0px -50% 0px" }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = isMenuOpen ? "hidden" : "";
+  }, [isMenuOpen]);
 
   return (
-    <nav
+    <>
+    <header
       className={cn(
-        "fixed w-full z-40 transition-all duration-300",
+        "fixed inset-x-0 top-0 z-40 transition-all duration-300",
         isScrolled
-          ? "py-3 bg-background/80 backdrop-blur-md shadow-xs"
-          : "py-5"
+          ? "border-b border-border/70 bg-background/75 py-3 backdrop-blur-lg"
+          : "border-b border-transparent py-5"
       )}
     >
-      <div className="container flex items-center justify-between">
-        {/* Logo */}
-        <a
-          className="text-xl font-bold text-primary flex items-center"
-          href="#hero"
-        >
-          <span className="relative z-10">
-            <span className="text-glow text-foreground">George Fotabong</span>{" "}
-            Portfolio
-          </span>
+      <nav className="container flex items-center justify-between">
+        <a href="#hero" className="font-mono text-sm font-medium tracking-tight">
+          <span className="text-accent">~/</span>
+          {profile.name.split(" ").slice(0, 2).join("-").toLowerCase()}
         </a>
 
-        {/* Right side: desktop links + theme + menu button */}
-        <div className="flex items-center space-x-5">
-          {/* Desktop nav links */}
-          <div className="hidden md:flex space-x-8">
-            {navItems.map((item, key) => (
+        <div className="flex items-center gap-2">
+          <ul className="hidden items-center gap-1 md:flex">
+            {navItems.map((item) => (
+              <li key={item.href}>
+                <a
+                  href={item.href}
+                  className={cn(
+                    "relative rounded-md px-3 py-2 text-sm transition-colors duration-200 hover:text-foreground",
+                    active === item.href ? "text-foreground" : "text-muted"
+                  )}
+                >
+                  {item.name}
+                  <span
+                    className={cn(
+                      "absolute inset-x-3 -bottom-0.5 h-px origin-left bg-accent transition-transform duration-300",
+                      active === item.href ? "scale-x-100" : "scale-x-0"
+                    )}
+                  />
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          <a
+            href={profile.resume}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-ghost ml-2 hidden px-4 py-2 md:inline-flex"
+          >
+            Résumé
+          </a>
+
+          <ThemeToggle />
+
+          <button
+            className="rounded-md p-2 text-foreground md:hidden"
+            onClick={() => setIsMenuOpen((open) => !open)}
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMenuOpen}
+          >
+            {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    {/* Mobile menu (outside the header so the header's backdrop-filter doesn't clip it) */}
+    <div
+      className={cn(
+        "fixed inset-0 z-30 bg-background/95 pt-20 backdrop-blur-lg transition-opacity duration-300 md:hidden",
+        isMenuOpen ? "opacity-100" : "pointer-events-none opacity-0"
+      )}
+    >
+        <ul className="container flex flex-col gap-1 pt-6">
+          {navItems.map((item, i) => (
+            <li
+              key={item.href}
+              className={cn(
+                "transition-all duration-300",
+                isMenuOpen ? "translate-y-0 opacity-100" : "-translate-y-2 opacity-0"
+              )}
+              style={{ transitionDelay: isMenuOpen ? `${i * 40}ms` : "0ms" }}
+            >
               <a
-                key={key}
                 href={item.href}
-                className="text-foreground/80 hover:text-primary transition-colors duration-300"
+                onClick={() => setIsMenuOpen(false)}
+                className="block border-b border-border py-4 text-2xl font-medium tracking-tight"
               >
                 {item.name}
               </a>
-            ))}
-          </div>
-
-          {/* Theme toggle (placeholder or component) */}
-          {/* <ThemeToggle /> */}
-
-          {/* Mobile menu button */}
-          <button
-            className="md:hidden text-foreground focus:outline-none"
-            onClick={toggleMenu}
-            aria-label="Toggle Menu"
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile menu overlay */}
-      <div
-        className={cn(
-          "fixed inset-0 bg-background/95 backdrop-blur-md z-30 flex flex-col items-center justify-center space-y-8 text-xl transition-all duration-300 md:hidden",
-          isMenuOpen
-            ? "opacity-100 pointer-events-auto"
-            : "opacity-0 pointer-events-none"
-        )}
-      >
-        {/* Links */}
-        {navItems.map((item, key) => (
-          <a
-            key={key}
-            href={item.href}
-            className="text-foreground/80 hover:text-primary transition-colors duration-300"
-            onClick={toggleMenu} // close on click
-          >
-            {item.name}
-          </a>
-        ))}
-
-        {/* Close button – shifted BELOW theme toggle area */}
-        <button
-          className="absolute top-16 right-6 text-foreground focus:outline-none"
-          onClick={toggleMenu}
-          aria-label="Close Menu"
-        >
-          <X size={28} />
-        </button>
-      </div>
-    </nav>
+            </li>
+          ))}
+          <li className="pt-6">
+            <a href={profile.resume} target="_blank" rel="noopener noreferrer" className="btn-primary w-full">
+              View résumé
+            </a>
+          </li>
+        </ul>
+    </div>
+    </>
   );
 };

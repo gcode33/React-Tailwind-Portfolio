@@ -1,33 +1,29 @@
-import { Navbar } from "../components/Navbar"
-import { ThemeToggle } from "../components/ThemeToggle"
-import { HeroSection } from "../components/HeroSection"
-import { AboutSection } from "../components/AboutSection"
-import {StarBackground} from "@/components/StarBackground"
-import { SkillsSection } from "../components/SkillsSection"
-import { ProjectSection } from "../components/ProjectSection"
-import { ContactSection } from "../components/ContactSection"
-import { Contact } from "lucide-react"  
-import { Footer } from "../components/Footer";
-export const Home = () => {
-  return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
-        {/*theme toggle*/}
-        <ThemeToggle />
-        {/*background effects*/}
-        <StarBackground />
+import { Navbar } from "@/components/Navbar";
+import { HeroSection } from "@/components/HeroSection";
+import { AboutSection } from "@/components/AboutSection";
+import { ExperienceSection } from "@/components/ExperienceSection";
+import { ProjectSection } from "@/components/ProjectSection";
+import { SkillsSection } from "@/components/SkillsSection";
+import { ContactSection } from "@/components/ContactSection";
+import { Footer } from "@/components/Footer";
 
-        {/* navbar */}
-        <Navbar />
-
-        {/* main section */}
-        <main>
-          <HeroSection/>
-          <AboutSection/>
-          <SkillsSection/>
-          <ProjectSection/>
-          <ContactSection/>
-        </main>
-  <Footer />
-    </div>
-  )
-}
+export const Home = () => (
+  <div className="min-h-screen overflow-x-clip">
+    <a
+      href="#about"
+      className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-md focus:bg-card focus:px-4 focus:py-2"
+    >
+      Skip to content
+    </a>
+    <Navbar />
+    <main>
+      <HeroSection />
+      <AboutSection />
+      <ExperienceSection />
+      <ProjectSection />
+      <SkillsSection />
+      <ContactSection />
+    </main>
+    <Footer />
+  </div>
+);

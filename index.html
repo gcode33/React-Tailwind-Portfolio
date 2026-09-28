@@ -1,10 +1,35 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>portforlio-website</title>
+    <title>George Fotabong Jr — Software Developer</title>
+    <meta
+      name="description"
+      content="George Fotabong Jr is a software developer in London, Ontario with production experience across Node/TypeScript, .NET and Python microservices."
+    />
+    <meta property="og:title" content="George Fotabong Jr — Software Developer" />
+    <meta
+      property="og:description"
+      content="Software developer with production experience across Node/TypeScript, .NET and Python microservices."
+    />
+    <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#09090b" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      // Apply the saved theme before first paint to avoid a flash. Dark is the default.
+      try {
+        if (localStorage.getItem("theme") === "light") {
+          document.documentElement.classList.remove("dark");
+        }
+      } catch (e) {}
+    </script>
   </head>
   <body>
     <div id="root"></div>

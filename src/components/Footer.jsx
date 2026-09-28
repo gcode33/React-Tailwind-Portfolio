@@ -1,21 +1,16 @@
-import { Copyright, ArrowUp } from "lucide-react";
+import { ArrowUp } from "lucide-react";
+import { profile } from "@/data/profile";
 
-export const Footer = () => {
-  const year = new Date().getFullYear();
-  return (
-    <footer className="w-full py-6 bg-background text-center border-t border-border mt-12">
-      <div className="mb-2 flex items-center justify-center">
-        <a href="#hero" className="flex items-center gap-1 text-primary hover:underline text-sm">
-          <ArrowUp className="w-4 h-4" />
-          <span>Back to top</span>
-        </a>
-      </div>
-      <div className="flex items-center justify-center gap-2 text-muted-foreground text-sm">
-        <Copyright className="w-4 h-4" />
-        <span>
-          {year} George Fotabong &mdash; All rights reserved
-        </span>
-      </div>
-    </footer>
-  );
-};
+export const Footer = () => (
+  <footer className="border-t border-border py-8">
+    <div className="container flex flex-col items-center justify-between gap-4 text-sm text-muted sm:flex-row">
+      <p>
+        © {new Date().getFullYear()} {profile.name}. Built with React &amp; Tailwind CSS.
+      </p>
+      <a href="#hero" className="group inline-flex items-center gap-1.5 transition-colors hover:text-foreground">
+        Back to top
+        <ArrowUp className="h-4 w-4 transition-transform duration-200 group-hover:-translate-y-0.5" />
+      </a>
+    </div>
+  </footer>
+);
