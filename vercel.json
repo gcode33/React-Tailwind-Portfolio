@@ -1,0 +1,6 @@
+{
+  "redirects": [
+    { "source": "/GeorgeFotabongJr_CV.pdf", "destination": "/GeorgeFotabong_Resume.pdf", "permanent": true }
+  ],
+  "rewrites": [{ "source": "/((?!.*\\.).*)", "destination": "/index.html" }]
+}
