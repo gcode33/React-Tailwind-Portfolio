@@ -101,13 +101,13 @@ export const HeroSection = () => (
           <pre className="overflow-x-auto p-6 font-mono text-[13px] leading-7">
             <code>
               <span className="text-accent">const</span> <span>george</span> = {"{"}
-              {"\n"}  role: <span className="text-emerald-500">"Software Developer"</span>,
-              {"\n"}  location: <span className="text-emerald-500">"London, ON"</span>,
-              {"\n"}  currently: <span className="text-emerald-500">"Lynked Inc."</span>,
+              {"\n"}  role: <span className="text-emerald-700 dark:text-emerald-400">"Software Developer"</span>,
+              {"\n"}  location: <span className="text-emerald-700 dark:text-emerald-400">"London, ON"</span>,
+              {"\n"}  currently: <span className="text-emerald-700 dark:text-emerald-400">"Lynked Inc."</span>,
               {"\n"}  stack: [
-              {"\n"}    <span className="text-emerald-500">"TypeScript"</span>, <span className="text-emerald-500">".NET"</span>, <span className="text-emerald-500">"Python"</span>,
+              {"\n"}    <span className="text-emerald-700 dark:text-emerald-400">"TypeScript"</span>, <span className="text-emerald-700 dark:text-emerald-400">".NET"</span>, <span className="text-emerald-700 dark:text-emerald-400">"Python"</span>,
               {"\n"}  ],
-              {"\n"}  openTo: <span className="text-emerald-500">"interesting problems"</span>,
+              {"\n"}  openTo: <span className="text-emerald-700 dark:text-emerald-400">"interesting problems"</span>,
               {"\n"}{"}"};<span className="ml-0.5 inline-block h-4 w-2 translate-y-0.5 animate-pulse bg-accent" />
             </code>
           </pre>

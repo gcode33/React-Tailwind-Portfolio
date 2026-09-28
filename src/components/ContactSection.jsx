@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Check, Copy, Github, Linkedin, Mail, Phone } from "lucide-react";
 import { Reveal } from "./Reveal";
 import { profile } from "@/data/profile";
@@ -11,12 +11,16 @@ const links = [
 
 export const ContactSection = () => {
   const [copied, setCopied] = useState(false);
+  const resetTimer = useRef(null);
+
+  useEffect(() => () => clearTimeout(resetTimer.current), []);
 
   const copyEmail = async () => {
     try {
       await navigator.clipboard.writeText(profile.email);
       setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      clearTimeout(resetTimer.current);
+      resetTimer.current = setTimeout(() => setCopied(false), 2000);
     } catch {
       window.location.href = `mailto:${profile.email}`;
     }
@@ -35,8 +39,8 @@ export const ContactSection = () => {
           <p className="relative mb-3 font-mono text-sm text-accent">05. Contact</p>
           <h2 className="relative text-3xl font-semibold tracking-tight md:text-5xl">Let's work together.</h2>
           <p className="relative mx-auto mt-4 max-w-lg text-muted">
-            I'm open to software engineering roles and interesting collaborations. The fastest way to
-            reach me is email — I usually reply within a day.
+            I'm open to software engineering roles and interesting collaborations. The best way to
+            reach me is by email.
           </p>
 
           <div className="relative mt-8 flex flex-wrap items-center justify-center gap-3">
@@ -44,9 +48,13 @@ export const ContactSection = () => {
               <Mail className="h-4 w-4" />
               {profile.email}
             </a>
-            <button onClick={copyEmail} className="btn-ghost" aria-label="Copy email address">
-              {copied ? <Check className="h-4 w-4 text-emerald-500" /> : <Copy className="h-4 w-4" />}
-              {copied ? "Copied" : "Copy"}
+            <button onClick={copyEmail} className="btn-ghost">
+              {copied ? (
+                <Check aria-hidden className="h-4 w-4 text-emerald-700 dark:text-emerald-400" />
+              ) : (
+                <Copy aria-hidden className="h-4 w-4" />
+              )}
+              <span aria-live="polite">{copied ? "Email copied" : "Copy email"}</span>
             </button>
           </div>
 

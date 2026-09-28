@@ -11,8 +11,11 @@ const ProjectCover = ({ project }) => {
     return (
       <img
         src={project.image}
-        alt={`Screenshot of ${project.title}`}
+        alt=""
+        width={1400}
+        height={716}
         loading="lazy"
+        decoding="async"
         className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
       />
     );
@@ -44,7 +47,7 @@ export const ProjectSection = () => (
         index="03"
         eyebrow="Projects"
         title="Things I've built."
-        description="Side projects where I explore new stacks — from LLM tooling to real-time apps."
+        description="Side projects where I explore new stacks — from developer tooling to real-time apps."
       />
 
       <div className="grid gap-6 md:grid-cols-2">
@@ -58,6 +61,7 @@ export const ProjectSection = () => (
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label={`${project.title}: view source on GitHub`}
               className={`card card-hover group flex h-full flex-col overflow-hidden ${
                 i === 0 ? "md:flex-row" : ""
               }`}

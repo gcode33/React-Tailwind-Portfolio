@@ -24,8 +24,8 @@ export const AboutSection = () => (
           </p>
           <p>
             Previously, at Continuum Commerce Solutions, I designed and deployed a .NET and SQL
-            Server platform for managing client configuration, and integrated automated API fuzz
-            testing and SonarQube quality gates into the CI/CD pipeline. Before that, I spent two
+            Server platform for managing client configuration, built automated API fuzz-testing
+            pipelines, and made SonarQube a blocking quality gate in GitLab CI/CD. Before that, I spent two
             years at Rocket Financial developing accessible React and TypeScript interfaces and
             containerized microservices.
           </p>
