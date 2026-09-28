@@ -4,27 +4,30 @@ import { SectionHeading } from "./SectionHeading";
 import { education } from "@/data/profile";
 
 const stats = [
-  { value: "2022", label: "Shipping production code since" },
-  { value: "3", label: "Companies I've built software for" },
-  { value: "5", label: "Recent projects on GitHub" },
+  { value: "2022", label: "Professional experience since" },
+  { value: "3", label: "Software development roles" },
+  { value: "5", label: "Featured projects" },
 ];
 
 export const AboutSection = () => (
   <section id="about" className="py-24 md:py-32">
     <div className="container">
-      <SectionHeading index="01" eyebrow="About" title="Pragmatic engineer, careful with the details." />
+      <SectionHeading index="01" eyebrow="About" title="Building reliable software, end to end." />
 
       <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr]">
         <Reveal className="space-y-5 text-lg leading-relaxed text-muted">
           <p>
-            I'm a software developer based in London, Ontario. Today I work at{" "}
-            <span className="text-foreground">Lynked Inc.</span>, shipping cross-service features
-            and tracking down production defects across NestJS, Next.js, Nuxt and Laravel codebases.
+            I'm a software developer based in London, Ontario, with a BSc in Computer Science. I
+            currently work at <span className="text-foreground">Lynked Inc.</span>, where I build
+            cross-service features and resolve production issues across NestJS, Next.js, Nuxt and
+            Laravel applications.
           </p>
           <p>
-            Before that I built a .NET and SQL Server configuration platform at Continuum Commerce
-            Solutions, wired automated API fuzz testing and SonarQube quality gates into CI/CD, and
-            spent two years building React and TypeScript interfaces at Rocket Financial.
+            Previously, at Continuum Commerce Solutions, I designed and deployed a .NET and SQL
+            Server platform for managing client configuration, and integrated automated API fuzz
+            testing and SonarQube quality gates into the CI/CD pipeline. Before that, I spent two
+            years at Rocket Financial developing accessible React and TypeScript interfaces and
+            containerized microservices.
           </p>
           <p>
             I focus on the fundamentals that make software reliable: correct API behaviour, clean
