@@ -27,11 +27,15 @@ export const AboutSection = () => (
             spent two years building React and TypeScript interfaces at Rocket Financial.
           </p>
           <p>
-            I care about the unglamorous things that make software trustworthy: correct status codes,
-            clean data, real test coverage, and changes that are small enough to review. I also use AI
-            tools as part of my everyday workflow. They've helped me get up to speed on unfamiliar
-            codebases quickly, prototype and ship features faster, write more thorough tests, and
-            track down tricky bugs.
+            I focus on the fundamentals that make software reliable: correct API behaviour, clean
+            data, meaningful test coverage, and small, reviewable changes.
+          </p>
+          <p>
+            I'm also very interested in artificial intelligence and how it is changing the way
+            software is built. I use AI tools every day to understand large codebases, prototype
+            and validate ideas, strengthen test coverage, and analyze production issues, while
+            carefully reviewing everything that ships. It has made me a faster, more thorough
+            engineer, and I'm continually exploring new ways to apply it.
           </p>
         </Reveal>
 
