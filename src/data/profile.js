@@ -58,8 +58,8 @@ export const projects = [
     title: "LevelUp",
     year: "2026",
     description:
-      "Turns an uploaded resume into an LLM-generated career roadmap. Per-user data is isolated with PostgreSQL Row Level Security, and model keys stay server-side.",
-    tags: ["Next.js", "TypeScript", "Supabase", "LLM APIs"],
+      "A career-growth app that helps users set goals and track their progress through a personalised skills plan. Per-user data is isolated with PostgreSQL Row Level Security, and API keys stay server-side.",
+    tags: ["Next.js", "TypeScript", "Supabase", "PostgreSQL"],
     github: "https://github.com/gcode33/levelup",
     icon: "rocket",
   },

@@ -29,8 +29,8 @@ export const AboutSection = () => (
           <p>
             I care about the unglamorous things that make software trustworthy: correct status codes,
             clean data, real test coverage, and changes that are small enough to review. Outside of
-            work I build with LLMs and data — from resume-driven career roadmaps to market sentiment
-            analysis.
+            work I build side projects to explore new stacks — from real-time sports tracking and
+            developer tooling to market data analysis.
           </p>
         </Reveal>
 
