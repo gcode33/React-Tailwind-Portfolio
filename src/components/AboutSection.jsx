@@ -6,7 +6,7 @@ import { education } from "@/data/profile";
 const stats = [
   { value: "2022", label: "Professional experience since" },
   { value: "3", label: "Software development roles" },
-  { value: "5", label: "Featured projects" },
+  { value: "4", label: "Featured projects" },
 ];
 
 export const AboutSection = () => (
