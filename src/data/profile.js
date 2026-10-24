@@ -5,8 +5,6 @@ export const profile = {
   role: "Software Developer",
   location: "London, ON",
   email: "fotabonggeorgejr@gmail.com",
-  phone: "+1 (289) 937-0842",
-  phoneHref: "tel:+12899370842",
   github: "https://github.com/gcode33",
   linkedin: "https://www.linkedin.com/in/george-fotabong-b10b92202/",
   resume: "/GeorgeFotabong_Resume.pdf",
@@ -62,15 +60,6 @@ export const projects = [
     tags: ["Next.js", "TypeScript", "Supabase", "PostgreSQL"],
     github: "https://github.com/gcode33/levelup",
     icon: "rocket",
-  },
-  {
-    title: "Market Sentiment Analyzer",
-    year: "2026",
-    description:
-      "Ingests market data and news from three APIs, scores sentiment with transformer models, and aggregates results into sector-level trend dashboards.",
-    tags: ["Python", "PyTorch", "Transformers", "Pandas"],
-    github: "https://github.com/gcode33/market-intel",
-    icon: "chart",
   },
   {
     title: "GitHub Dashboard",

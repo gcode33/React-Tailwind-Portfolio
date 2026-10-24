@@ -1,12 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import { Check, Copy, Github, Linkedin, Mail, Phone } from "lucide-react";
+import { Check, Copy, Github, Linkedin, Mail } from "lucide-react";
 import { Reveal } from "./Reveal";
 import { profile } from "@/data/profile";
 
 const links = [
   { label: "LinkedIn", href: profile.linkedin, icon: Linkedin },
   { label: "GitHub", href: profile.github, icon: Github },
-  { label: profile.phone, href: profile.phoneHref, icon: Phone },
 ];
 
 export const ContactSection = () => {

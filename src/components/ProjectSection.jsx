@@ -1,9 +1,13 @@
-import { ArrowUpRight, BarChart3, GitPullRequest, Github, Rocket } from "lucide-react";
+import { ArrowUpRight, GitPullRequest, Github, Rocket } from "lucide-react";
 import { Reveal } from "./Reveal";
 import { SectionHeading } from "./SectionHeading";
 import { profile, projects } from "@/data/profile";
 
-const icons = { rocket: Rocket, chart: BarChart3, git: GitPullRequest };
+const icons = { rocket: Rocket, git: GitPullRequest };
+
+// The first project is featured full-width. If that leaves an odd number of cards, the
+// last one also spans the row so it isn't stranded alone in the two-column grid.
+const isWide = (i) => i === 0 || (i === projects.length - 1 && (projects.length - 1) % 2 === 1);
 
 // Projects without a screenshot get a designed header instead of an empty box.
 const ProjectCover = ({ project }) => {
@@ -16,14 +20,14 @@ const ProjectCover = ({ project }) => {
         height={716}
         loading="lazy"
         decoding="async"
-        className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+        className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
       />
     );
   }
 
   const Icon = icons[project.icon] ?? Rocket;
   return (
-    <div className="relative flex h-full w-full items-center justify-center overflow-hidden">
+    <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
       <div aria-hidden className="bg-dots absolute inset-0 [mask-image:none]" />
       <div
         aria-hidden
@@ -51,11 +55,13 @@ export const ProjectSection = () => (
       />
 
       <div className="grid gap-6 md:grid-cols-2">
-        {projects.map((project, i) => (
+        {projects.map((project, i) => {
+          const wide = isWide(i);
+          return (
           <Reveal
             key={project.title}
             delay={(i % 2) * 100}
-            className={i === 0 ? "md:col-span-2" : undefined}
+            className={wide ? "md:col-span-2" : undefined}
           >
             <a
               href={project.github}
@@ -63,20 +69,20 @@ export const ProjectSection = () => (
               rel="noopener noreferrer"
               aria-label={`${project.title}: view source on GitHub`}
               className={`card card-hover group flex h-full flex-col overflow-hidden ${
-                i === 0 ? "md:flex-row" : ""
+                wide ? "md:flex-row" : ""
               }`}
             >
               <div
-                className={`aspect-[16/9] overflow-hidden border-b border-border bg-subtle ${
-                  i === 0 ? "md:aspect-auto md:w-1/2 md:border-r md:border-b-0" : ""
+                className={`relative aspect-[16/9] overflow-hidden border-b border-border bg-subtle ${
+                  wide ? "md:aspect-auto md:min-h-72 md:w-1/2 md:border-r md:border-b-0" : ""
                 }`}
               >
                 <ProjectCover project={project} />
               </div>
 
-              <div className={`flex flex-1 flex-col p-6 ${i === 0 ? "md:justify-center md:p-10" : ""}`}>
+              <div className={`flex flex-1 flex-col p-6 ${wide ? "md:justify-center md:p-10" : ""}`}>
                 <div className="flex items-start justify-between gap-4">
-                  <h3 className={`font-semibold tracking-tight ${i === 0 ? "text-2xl" : "text-xl"}`}>
+                  <h3 className={`font-semibold tracking-tight ${wide ? "text-2xl" : "text-xl"}`}>
                     {project.title}
                   </h3>
                   <span className="font-mono text-xs text-muted">{project.year}</span>
@@ -100,7 +106,8 @@ export const ProjectSection = () => (
               </div>
             </a>
           </Reveal>
-        ))}
+          );
+        })}
       </div>
 
       <Reveal className="mt-12 text-center">
