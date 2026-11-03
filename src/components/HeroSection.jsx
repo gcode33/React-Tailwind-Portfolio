@@ -102,7 +102,7 @@ export const HeroSection = () => (
             <code>
               <span className="text-accent">const</span> <span>george</span> = {"{"}
               {"\n"}  role: <span className="text-emerald-700 dark:text-emerald-400">"Software Developer"</span>,
-              {"\n"}  location: <span className="text-emerald-700 dark:text-emerald-400">"London, ON"</span>,
+              {"\n"}  location: <span className="text-emerald-700 dark:text-emerald-400">"Toronto, ON"</span>,
               {"\n"}  currently: <span className="text-emerald-700 dark:text-emerald-400">"Lynked Inc."</span>,
               {"\n"}  stack: [
               {"\n"}    <span className="text-emerald-700 dark:text-emerald-400">"TypeScript"</span>, <span className="text-emerald-700 dark:text-emerald-400">".NET"</span>, <span className="text-emerald-700 dark:text-emerald-400">"Python"</span>,

@@ -3,7 +3,7 @@
 export const profile = {
   name: "George Fotabong Jr",
   role: "Software Developer",
-  location: "London, ON",
+  location: "Toronto, ON",
   email: "fotabonggeorgejr@gmail.com",
   github: "https://github.com/gcode33",
   linkedin: "https://www.linkedin.com/in/george-fotabong-b10b92202/",
@@ -19,35 +19,37 @@ export const experience = [
     company: "Lynked Inc.",
     period: "Mar 2026 — Present",
     points: [
-      "Eliminated duplicate-record creation across three backend services with multi-field validation, and fixed update paths that persisted empty strings instead of NULL.",
-      "Corrected REST endpoints that returned HTTP 200 for missing resources, adding 404/400 responses with regression tests.",
-      "Improved search relevance by replacing exact-match lookup with fuzzy matching for partial and misspelled queries.",
-      "Built cross-service features: bulk record updates, multi-criteria search with automatic status transitions, and new fields made editable across three front ends.",
-      "Diagnosed and fixed production defects, including a page-crashing render bug, truncated stored notes, stale form state, and broken pagination on iOS and Android.",
-      "Maintain two legacy PHP/Laravel applications with minimal, defensive changes.",
+      "Deliver full-stack features end to end across a multi-service platform (Next.js, Nuxt 3, Vue, NestJS, Laravel, PostgreSQL), such as an inspection checklist that records who made each change and auto-creates follow-up items, and bulk-edit tools.",
+      "Maintain two legacy PHP/Laravel applications, fixing REST endpoints that reported success on failure so they return accurate 4xx/5xx errors and roll back database transactions.",
+      "Harden data integrity and security with duplicate-record checks, Zod schemas and strict input-format rules, and fix SQL injection (prepared statements), API-key auth that accepted revoked keys, and log/HTML-email injection.",
+      "Debug and fix React, Next.js and Vue defects: pages crashing to a white screen (error boundaries, null-safe lookups), deep links that opened the wrong item, stale form state, and mobile layout on iOS and Android.",
+      "Write automated tests for new and legacy code: the first PHPUnit unit tests for an untested legacy module (run in Docker), Vitest unit and component tests, Playwright end-to-end tests, and mutation testing to expose weak tests.",
+      "Collaborate in an Agile team through Jira and Bitbucket pull requests, address senior code review feedback, and document technical debt to support code quality and future planning.",
+      "Apply AI-assisted development (Claude Code, Atlassian Rovo) in a spec-first, test-driven workflow, verifying AI output by running it; built personal Claude Code review agents and hooks, plus a scheduled job that turns PR comments into fix briefs.",
     ],
-    tech: ["NestJS", "Next.js", "Nuxt 3", "Node.js", "PHP/Laravel", "Go", "PostgreSQL", "Redis", "Docker Compose", "Caddy", "Jira"],
+    tech: ["TypeScript", "React", "Next.js", "Nuxt 3", "Vue 3", "NestJS", "PHP/Laravel", "PostgreSQL", "PHPUnit", "Vitest", "Playwright", "Docker", "Sentry"],
   },
   {
     role: "Software Developer Intern",
     company: "Continuum Commerce Solutions",
-    period: "Nov 2024 — Sept 2025",
+    period: "Nov 2024 — Sep 2025",
     points: [
       "Designed and deployed a full-stack .NET and SQL Server platform for managing client configuration.",
-      "Built automated API fuzz-testing pipelines that surfaced edge-case failures and security defects before release.",
-      "Integrated SonarQube into GitLab CI/CD, turning code-quality regressions into a blocking gate.",
+      "Built API fuzz-testing pipelines that surfaced edge-case failures and security defects before release.",
+      "Refactored legacy code and made SonarQube a blocking code quality gate in GitLab CI/CD.",
     ],
     tech: [".NET", "C#", "SQL Server", "Python", "Docker", "AWS", "Terraform", "Ansible", "GitLab CI/CD", "SonarQube", "Power BI"],
   },
   {
     role: "Software Developer Intern",
     company: "Rocket Financial",
-    period: "Oct 2022 — Sept 2024",
+    period: "Oct 2022 — Sep 2024",
     points: [
-      "Built responsive, accessible React and TypeScript interfaces, and containerized microservices with Docker and Kubernetes.",
-      "Expanded automated test coverage with NUnit, Jest and PyTest across services and UI components.",
+      "Built responsive, accessible front-end interfaces in React and TypeScript, improving usability for users with different access needs.",
+      "Developed microservices and containerized them with Docker and Kubernetes to streamline deployments.",
+      "Expanded automated test suites with NUnit, Jest, and pytest across services and UI components, improving test coverage and helping catch regressions earlier.",
     ],
-    tech: ["React", "TypeScript", "Docker", "Kubernetes", "NUnit", "Jest", "PyTest"],
+    tech: ["React", "TypeScript", "Docker", "Kubernetes", "NUnit", "Jest", "pytest"],
   },
 ];
 
@@ -91,12 +93,12 @@ export const projects = [
 ];
 
 export const skills = [
-  { group: "Languages", items: ["TypeScript", "JavaScript", "Python", "C#", "Java", "PHP", "SQL", "Bash"] },
-  { group: "Backend", items: [".NET", "ASP.NET Core", "Blazor", "SignalR", "NestJS", "Node.js", "FastAPI", "Laravel", "REST APIs", "Microservices"] },
-  { group: "Frontend", items: ["React", "Next.js", "Nuxt 3", "Vite", "Tailwind CSS", "Accessible UI"] },
-  { group: "Data & ML", items: ["PostgreSQL", "SQL Server", "MongoDB", "Redis", "Prisma", "Supabase", "ETL", "Pandas", "NumPy", "Scikit-learn", "XGBoost", "PyTorch", "Transformers", "LLM APIs", "Power BI"] },
-  { group: "Testing", items: ["Vitest", "Jest", "PyTest", "NUnit", "Playwright", "SonarQube", "Code review"] },
-  { group: "Tools", items: ["Git", "Docker", "Docker Compose", "Bitbucket Pipelines", "GitLab CI/CD", "Jira", "Agile/Scrum"] },
+  { group: "Languages", items: ["TypeScript", "JavaScript", "PHP", "Python", "C#", "Java", "SQL", "Bash", "HTML", "CSS"] },
+  { group: "Frontend", items: ["React", "Next.js", "Vue 3", "Nuxt 3", "Tailwind CSS", "Mantine", "Vite", "Responsive and accessible UI"] },
+  { group: "Backend", items: ["Node.js", "NestJS", "Express", "Laravel", ".NET", "ASP.NET Core", "Blazor", "FastAPI", "REST APIs", "RabbitMQ", "Microservices", "Software Architecture"] },
+  { group: "Data", items: ["PostgreSQL", "SQL Server", "MongoDB", "Prisma", "Supabase", "SQLAlchemy", "Pandas", "NumPy", "Power BI"] },
+  { group: "AI & Tooling", items: ["Claude Code (custom agents, skills, hooks)", "Model Context Protocol", "Agentic workflows", "Prompt engineering", "LLM APIs (OpenAI-compatible, Ollama)", "Hugging Face Transformers", "PyTorch"] },
+  { group: "Testing & Tools", items: ["PHPUnit", "Vitest", "Jest", "Playwright", "PyTest", "NUnit", "Testing Library", "Mutation testing", "SonarQube", "Git", "Bitbucket", "GitLab CI/CD", "Docker", "Docker Compose", "Linux", "Sentry", "Jira", "Agile/Scrum", "AWS"] },
 ];
 
 export const education = {

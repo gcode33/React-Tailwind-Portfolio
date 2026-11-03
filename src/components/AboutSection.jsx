@@ -17,7 +17,7 @@ export const AboutSection = () => (
       <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr]">
         <Reveal className="space-y-5 text-lg leading-relaxed text-muted">
           <p>
-            I'm a software developer based in London, Ontario, with a BSc in Computer Science. I
+            I'm a software developer based in Toronto, Ontario, with a BSc in Computer Science. I
             currently work at <span className="text-foreground">Lynked Inc.</span>, where I build
             cross-service features and resolve production issues across NestJS, Next.js, Nuxt and
             Laravel applications.
