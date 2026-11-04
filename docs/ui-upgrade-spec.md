@@ -1,6 +1,6 @@
 # Portfolio UI upgrade: "Match Day" spec
 
-> **Direction change, 2026-11-04:** George wants the site professional and focused on computer science and software development. All soccer and anime content was removed, including the jersey, ball, goal net, pitch lines, referee sounds and themed wording. Sections below that describe those themes are out of date and kept only as history. The current source of truth is the code.
+> **Direction change, 2026-11-04:** The page content is professional and about computer science and software development, with no talk of soccer or anime. George then asked for a look closer to edolus.com and for soccer in the scroll transitions, so a ball appears as wordless motion only. Off the clock, Apple's player and background music are gone, and the site has its own meeting picker. Much of this spec is out of date and kept as history. The current source of truth is the code.
 
 Status: concept approved by George on 2026-11-03. Nothing is built yet.
 Layout boards: https://claude.ai/artifact/JmeKMeFHBSfvU56Wer3Uvm (private to George)
