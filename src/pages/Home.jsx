@@ -9,6 +9,7 @@ import { SkillsSection } from "@/components/SkillsSection";
 import { ContactSection } from "@/components/ContactSection";
 import { Footer } from "@/components/Footer";
 import { SectionTransition } from "@/components/SectionTransition";
+import { Dock } from "@/components/Dock";
 
 export const Home = () => {
   // The browser tries to jump to a URL hash (e.g. /#projects) before React has rendered
@@ -19,7 +20,7 @@ export const Home = () => {
   }, []);
 
   return (
-    <div className="min-h-screen overflow-x-clip">
+    <div className="min-h-screen overflow-x-clip pb-15 print:pb-0">
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:bg-subtle focus:px-4 focus:py-2"
@@ -38,6 +39,7 @@ export const Home = () => {
         <ContactSection />
       </main>
       <Footer />
+      <Dock />
     </div>
   );
 };

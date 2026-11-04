@@ -1,6 +1,7 @@
 import { useEffect, useImperativeHandle, useRef } from "react";
 import { useReducedMotion } from "motion/react";
 import { FLIGHT_S, SHOT_S, ballAt, netDisplacement } from "@/lib/net";
+import { sound } from "@/lib/sound";
 
 const CHALK = "238, 241, 228";
 const CHELSEA = "#034694";
@@ -147,6 +148,7 @@ export const GoalNet = ({ ref }) => {
       shoot: (fromElement) => {
         if (reduced) return;
         shootFrom.current?.(fromElement?.getBoundingClientRect());
+        sound.effect("netHit");
       },
     }),
     [reduced]

@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useReducedMotion } from "motion/react";
 import { getJumpTarget } from "@/lib/sectionJump";
+import { sound } from "@/lib/sound";
 import { Ball } from "./Graphics";
 
 const WIPE_MS = 350;
@@ -49,6 +50,7 @@ export const SectionTransition = () => {
 
       state.active = true;
       state.covered = false;
+      sound.effect("kick");
       root.hidden = false;
       try {
         const flight = ball.animate(

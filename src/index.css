@@ -38,6 +38,8 @@
   html {
     @apply scroll-smooth;
     scroll-padding-top: 5rem;
+    /* Keeps keyboard focus from landing behind the dock. */
+    scroll-padding-bottom: 5rem;
   }
 
   body {

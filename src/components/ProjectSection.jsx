@@ -1,7 +1,10 @@
 import { ArrowUpRight, Github, Play } from "lucide-react";
 import { Reveal } from "./Reveal";
 import { SectionHeading } from "./SectionHeading";
+import { sound } from "@/lib/sound";
 import { profile, projects } from "@/data/profile";
+
+const tick = () => sound.effect("tick");
 
 export const ProjectSection = () => (
   <section id="projects" className="border-y border-border bg-subtle py-20 md:py-24">
@@ -16,6 +19,8 @@ export const ProjectSection = () => (
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${project.title}: view source on GitHub`}
+              onMouseEnter={tick}
+              onFocus={tick}
               className="group relative grid grid-cols-[2.75rem_minmax(0,1fr)] items-baseline gap-x-4 gap-y-2 py-5 after:absolute after:inset-x-0 after:-bottom-px after:h-px after:origin-left after:scale-x-0 after:bg-accent after:transition-transform after:duration-500 after:ease-out hover:after:scale-x-100 focus-visible:after:scale-x-100 md:grid-cols-[3.5rem_minmax(0,1.1fr)_minmax(0,1.6fr)_4rem] md:gap-x-6"
             >
               <span className="relative font-mono text-sm text-accent">
