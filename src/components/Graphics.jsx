@@ -31,7 +31,6 @@ export const PitchLines = () => (
     <g fill="none" stroke="var(--color-foreground)" strokeOpacity="0.16" strokeWidth="2">
       <line x1="720" y1="0" x2="720" y2="760" />
       <circle cx="720" cy="380" r="210" />
-      <circle cx="720" cy="380" r="5" fill="var(--color-foreground)" />
       <rect x="-40" y="130" width="250" height="500" />
       <rect x="1230" y="130" width="250" height="500" />
     </g>
