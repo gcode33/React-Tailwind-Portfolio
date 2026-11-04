@@ -1,19 +1,14 @@
 /* global __BUILD_INFO__ */
 import { ArrowUp } from "lucide-react";
 import { buildStripItems } from "@/lib/buildStrip";
-import { useInspect } from "@/lib/inspect";
-import { gyoNote, profile } from "@/data/profile";
+import { profile } from "@/data/profile";
 
 // Values added at build time. See scripts/build-info.mjs.
 const buildItems = buildStripItems(typeof __BUILD_INFO__ === "undefined" ? undefined : __BUILD_INFO__);
 
-export const Footer = () => {
-  const inspecting = useInspect();
-
-  return (
+export const Footer = () => (
     <footer className="border-t border-border py-8">
       <div className="container flex flex-col gap-4">
-        {inspecting && <p data-inspect-note className="font-mono text-[13px] leading-relaxed text-ember">// gyo: {gyoNote}</p>}
 
         <div className="flex flex-col items-center justify-between gap-4 text-sm text-muted sm:flex-row">
           <p>
@@ -47,5 +42,4 @@ export const Footer = () => {
         )}
       </div>
     </footer>
-  );
-};
+);

@@ -56,28 +56,25 @@
   --font-mono: "JetBrains Mono", "JetBrains Mono Fallback", ui-monospace, SFMono-Regular, Menlo, monospace;
   --font-display: "Anton", "Anton Fallback", Impact, "Arial Narrow", sans-serif;
 
-  /* Night pitch */
+  /* Ground */
   --color-background: #0c1410;
   --color-subtle: #13201a;
   --color-border: #2a3a31;
   --color-border-strong: #3b4e43;
 
-  /* Chalk */
+  /* Text and lines */
   --color-foreground: #eef1e4;
   --color-soft: #d8dfd2;
   --color-muted: #a9b5a6;
 
-  /* Chelsea blue for fills, its tint for accents on dark ground */
-  --color-chelsea: #034694;
-  --color-chelsea-hover: #0556b5;
+  /* Blue for fills, its tint for accents on dark ground */
+  --color-brand: #034694;
+  --color-brand-hover: #0556b5;
   --color-accent: #7fb2ff;
 
   /* Engineering */
   --color-mint: #8fe3cf;
   --color-removed: #ffb4a6;
-
-  /* Rising Sun. One Feitan detail only, the last Inspect note. */
-  --color-ember: #ff8a5c;
 }
 
 @layer base {
@@ -150,7 +147,7 @@
 }
 
 @utility btn-primary {
-  @apply btn bg-chelsea text-white hover:bg-chelsea-hover;
+  @apply btn bg-brand text-white hover:bg-brand-hover;
 }
 
 @utility btn-ghost {
@@ -174,7 +171,9 @@
 
 /* Sections that were never scrolled into view should still print. */
 @media print {
-  [data-reveal] {
+  [data-reveal],
+  [data-scrub],
+  [data-scrub] span {
     opacity: 1 !important;
     transform: none !important;
   }

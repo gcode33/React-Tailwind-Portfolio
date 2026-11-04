@@ -1,8 +1,7 @@
 import { effects as defaultEffects } from "./effects";
 
 const TICK_GAP_S = 0.06;
-const PREFERENCE_KEY = "match-day-sound";
-const WHISTLED_KEY = "match-day-whistled";
+const PREFERENCE_KEY = "portfolio-sound";
 
 const defaultContext = () => {
   const AudioContextClass = window.AudioContext || window.webkitAudioContext;
@@ -97,9 +96,7 @@ export const createSoundEngine = ({
       writeStorage(storage, PREFERENCE_KEY, "on");
       set({ status: "on", resumable: false });
       // Effects are otherwise silent until something happens, so confirm that it worked.
-      const firstTime = readStorage(storage, WHISTLED_KEY) === null;
-      if (firstTime) writeStorage(storage, WHISTLED_KEY, "yes");
-      effect(firstTime ? "whistle" : "tick");
+      effect("tick");
     },
 
     effect,

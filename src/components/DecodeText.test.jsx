@@ -33,9 +33,9 @@ describe("DecodeText", () => {
   });
 
   it("finishes as plain visible text with the noise layer gone", async () => {
-    const { container } = render(<h2><DecodeText text="Tracklist" /></h2>);
+    const { container } = render(<h2><DecodeText text="Projects" /></h2>);
     await waitFor(() => expect(container.querySelector('[aria-hidden="true"]')).toBeNull(), { timeout: 2000 });
     expect(container.querySelector(".text-transparent")).toBeNull();
-    expect(container.textContent).toBe("Tracklist");
+    expect(container.textContent).toBe("Projects");
   });
 });

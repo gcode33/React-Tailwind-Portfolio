@@ -2,7 +2,6 @@ import { useEffect, useRef } from "react";
 import { useReducedMotion } from "motion/react";
 import { getJumpTarget } from "@/lib/sectionJump";
 import { sound } from "@/lib/sound";
-import { Ball } from "./Graphics";
 
 const WIPE_MS = 350;
 const EXPO_IN = "cubic-bezier(0.7, 0, 0.84, 0)";
@@ -19,14 +18,13 @@ const landOn = (id) => {
   section.focus({ preventScroll: true });
 };
 
-// The through ball: on a section link click, the ball crosses the screen while a chalk panel
-// wipes over, the page jumps while it's fully covered, and the panel wipes away.
+// On a section link click, a panel wipes over the screen, the page jumps while it's fully
+// covered, and the panel wipes away.
 // Uses the browser's built-in Web Animations API, so it adds nothing to the download.
 export const SectionTransition = () => {
   const reduced = useReducedMotion();
   const rootRef = useRef(null);
   const panelRef = useRef(null);
-  const ballRef = useRef(null);
   const run = useRef({ active: false, covered: false, target: null, animations: [] });
 
   useEffect(() => {
@@ -42,7 +40,6 @@ export const SectionTransition = () => {
 
       const root = rootRef.current;
       const panel = panelRef.current;
-      const ball = ballRef.current;
       if (!root || !panel?.animate) {
         landOn(id);
         return;
@@ -50,23 +47,16 @@ export const SectionTransition = () => {
 
       state.active = true;
       state.covered = false;
-      sound.effect("kick");
+      sound.effect("jump");
       root.hidden = false;
       try {
-        const flight = ball.animate(
-          [
-            { transform: "translateX(0) rotate(0deg)" },
-            { transform: "translateX(calc(100vw + 6rem)) rotate(900deg)" },
-          ],
-          { duration: WIPE_MS * 2, easing: "cubic-bezier(0.6, 0, 0.3, 1)", fill: "forwards" }
-        );
         panel.style.transformOrigin = "left";
         const cover = panel.animate([{ transform: "scaleX(0)" }, { transform: "scaleX(1)" }], {
           duration: WIPE_MS,
           easing: EXPO_IN,
           fill: "forwards",
         });
-        state.animations = [flight, cover];
+        state.animations = [cover];
         await cover.finished;
 
         state.covered = true;
@@ -79,7 +69,7 @@ export const SectionTransition = () => {
           fill: "forwards",
         });
         state.animations.push(uncover);
-        await Promise.all([uncover.finished, flight.finished]);
+        await uncover.finished;
       } catch {
         // Cancelled on unmount. Nothing to clean up beyond the reset below.
       } finally {
@@ -115,10 +105,7 @@ export const SectionTransition = () => {
     >
       {/* Starts collapsed with an inline transform. Tailwind's scale-x-0 sets the separate CSS
           `scale` property, which would stay at zero and hide the panel however `transform` animates. */}
-      <div ref={panelRef} className="absolute inset-0 bg-foreground" style={{ transform: "scaleX(0)" }} />
-      <div ref={ballRef} className="absolute top-1/2 -left-12 h-10 w-10 -translate-y-1/2">
-        <Ball className="h-full w-full" fill="var(--color-chelsea)" mark="#fff" />
-      </div>
+      <div ref={panelRef} className="absolute inset-0 bg-brand" style={{ transform: "scaleX(0)" }} />
     </div>
   );
 };

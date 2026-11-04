@@ -24,7 +24,7 @@ export const Dock = () => {
           type="button"
           aria-pressed={on}
           onClick={sound.toggle}
-          className="flex min-h-11 shrink-0 cursor-pointer items-center gap-2 bg-background px-3.5 font-mono text-[13px] text-foreground transition-colors hover:bg-subtle focus-visible:outline-chelsea"
+          className="flex min-h-11 shrink-0 cursor-pointer items-center gap-2 bg-background px-3.5 font-mono text-[13px] text-foreground transition-colors hover:bg-subtle focus-visible:outline-brand"
         >
           <Icon aria-hidden="true" className={`h-4 w-4 ${on ? "text-accent" : "text-muted"}`} />
           Sound
@@ -34,7 +34,7 @@ export const Dock = () => {
           type="button"
           aria-pressed={inspecting}
           onClick={toggleInspect}
-          className={`flex min-h-11 shrink-0 cursor-pointer items-center gap-2 border border-background px-3.5 font-mono text-[13px] transition-colors focus-visible:outline-chelsea ${
+          className={`flex min-h-11 shrink-0 cursor-pointer items-center gap-2 border border-background px-3.5 font-mono text-[13px] transition-colors focus-visible:outline-brand ${
             inspecting ? "bg-background text-foreground" : "hover:bg-background/10"
           }`}
         >
