@@ -1,5 +1,7 @@
 # Portfolio UI upgrade: "Match Day" spec
 
+> **Direction change, 2026-11-04:** George wants the site professional and focused on computer science and software development. All soccer and anime content was removed, including the jersey, ball, goal net, pitch lines, referee sounds and themed wording. Sections below that describe those themes are out of date and kept only as history. The current source of truth is the code.
+
 Status: concept approved by George on 2026-11-03. Nothing is built yet.
 Layout boards: https://claude.ai/artifact/JmeKMeFHBSfvU56Wer3Uvm (private to George)
 
