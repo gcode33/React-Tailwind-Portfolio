@@ -10,9 +10,4 @@ describe("Dock", () => {
     expect(screen.getByRole("button", { name: "Sound" }).getAttribute("aria-pressed")).toBe("false");
     expect(screen.getByRole("status").textContent).toBe("Off until you choose");
   });
-
-  it("doesn't credit a track nobody is hearing", () => {
-    render(<Dock />);
-    expect(screen.queryByRole("link", { name: /ArtManzh/ })).toBeNull();
-  });
 });

@@ -4,8 +4,8 @@ import { sound, useSound } from "@/lib/sound";
 
 // George's songs are commercial recordings, so they only ever play through Apple's own
 // player. Nothing is requested from Apple until a visitor asks for a song, which keeps the
-// first view fast and third parties out of it. One player at a time, and opening one
-// pauses the dock's track (the engine keeps those two from overlapping).
+// first view fast and third parties out of it. One player at a time, and the site's sound
+// effects stay quiet while one is open.
 export const SongList = ({ songs }) => {
   const { externalPlayer } = useSound();
 
