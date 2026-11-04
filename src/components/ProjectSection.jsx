@@ -1,4 +1,4 @@
-import { ArrowUpRight, Github } from "lucide-react";
+import { ArrowUpRight, Github, Play } from "lucide-react";
 import { Reveal } from "./Reveal";
 import { SectionHeading } from "./SectionHeading";
 import { profile, projects } from "@/data/profile";
@@ -16,10 +16,16 @@ export const ProjectSection = () => (
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${project.title}: view source on GitHub`}
-              className="group grid grid-cols-[2.75rem_minmax(0,1fr)] items-baseline gap-x-4 gap-y-2 py-5 md:grid-cols-[3.5rem_minmax(0,1.1fr)_minmax(0,1.6fr)_4rem] md:gap-x-6"
+              className="group relative grid grid-cols-[2.75rem_minmax(0,1fr)] items-baseline gap-x-4 gap-y-2 py-5 after:absolute after:inset-x-0 after:-bottom-px after:h-px after:origin-left after:scale-x-0 after:bg-accent after:transition-transform after:duration-500 after:ease-out hover:after:scale-x-100 focus-visible:after:scale-x-100 md:grid-cols-[3.5rem_minmax(0,1.1fr)_minmax(0,1.6fr)_4rem] md:gap-x-6"
             >
-              <span className="font-mono text-sm text-accent">{project.side}</span>
-              <h3 className="display text-[32px] leading-[1.15] transition-colors duration-200 group-hover:text-accent">
+              <span className="relative font-mono text-sm text-accent">
+                <span className="transition-opacity duration-200 group-hover:opacity-0 group-focus-visible:opacity-0">{project.side}</span>
+                <Play
+                  aria-hidden="true"
+                  className="absolute top-0.5 left-0 h-3.5 w-3.5 fill-current opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100"
+                />
+              </span>
+              <h3 className="display text-[32px] leading-[1.15] transition-[color,translate] duration-300 ease-out group-hover:translate-x-2 group-hover:text-accent group-focus-visible:translate-x-2 group-focus-visible:text-accent">
                 {project.title}
               </h3>
               <div className="col-start-2 md:col-start-auto">

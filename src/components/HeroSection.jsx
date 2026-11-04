@@ -1,6 +1,7 @@
 import { Download, Github, Linkedin, Mail, MapPin } from "lucide-react";
 import { experience, personal, profile, projects } from "@/data/profile";
-import { Bracketed, PitchLines } from "./Graphics";
+import { Bracketed } from "./Graphics";
+import { PitchLines } from "./PitchLines";
 import { HeroName } from "./HeroName";
 import { Reveal } from "./Reveal";
 
