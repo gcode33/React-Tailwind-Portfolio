@@ -1,5 +1,4 @@
 // Single source of truth for site content. Update this file when the resume changes.
-import { yearsOfExperience } from "@/lib/experience";
 
 export const profile = {
   name: "George Fotabong Jr",
@@ -9,6 +8,8 @@ export const profile = {
   github: "https://github.com/gcode33",
   linkedin: "https://www.linkedin.com/in/george-fotabong-b10b92202/",
   resume: "/GeorgeFotabong_Resume.pdf",
+  // George's public booking page. Set it in .env.production. Until then the section stays hidden.
+  bookingUrl: import.meta.env.VITE_BOOKING_URL || null,
   currently: "Lynked Inc.",
   summary:
     "Software developer with production experience across Node/TypeScript, .NET and Python microservices.",
@@ -79,7 +80,6 @@ export const shipStages = [
 // Side A is 2026, Side B is 2025.
 export const projects = [
   {
-    side: "A1",
     title: "LevelUp",
     year: "2026",
     description:
@@ -88,7 +88,6 @@ export const projects = [
     github: "https://github.com/gcode33/levelup",
   },
   {
-    side: "A2",
     title: "GitHub Dashboard",
     year: "2026",
     description:
@@ -97,7 +96,6 @@ export const projects = [
     github: "https://github.com/gcode33/github-dashboard",
   },
   {
-    side: "B1",
     title: "MultiSportTracker",
     year: "2025",
     description:
@@ -106,7 +104,6 @@ export const projects = [
     github: "https://github.com/gcode33/MultiSportTracker",
   },
   {
-    side: "B2",
     title: "Toronto Event Finder",
     year: "2025",
     description:
@@ -131,31 +128,22 @@ export const education = {
   period: "2020 — 2025",
 };
 
-export const personal = {
-  club: "Chelsea",
-  position: "Striker",
-  // One for each year of experience, worked out from the job dates above.
-  number: yearsOfExperience(experience),
-  songs: [
+export const songs = [
     { title: "Breeze", artist: "Jiro Inagaki and His Soul Media", href: "https://music.apple.com/ca/album/breeze/1508946500?i=1508946503" },
     { title: "L'amore dice Ciao", artist: "Armando Trovajoli", href: "https://music.apple.com/ca/album/lamore-dice-ciao-main-titles-2022-remastered/882321839?i=882321840" },
     { title: "Sylvia", artist: "Arthur Verocai", href: "https://music.apple.com/ca/album/sylvia/495578530?i=495578535" },
     { title: "I Choose You", artist: "Chicago Gangsters", href: "https://music.apple.com/ca/album/i-choose-you/1376664672?i=1376665099" },
     { title: "Earth, Wind & Fire", artist: "Earth, Wind & Fire", href: "https://music.apple.com/ca/album/earth-wind-fire/523227111?i=523227120" },
-  ],
-  rewatching: "Hunter x Hunter. Feitan first, then Gon, Killua, Kurapika and Leorio.",
-};
+  ];
 
 // Inspect mode: how each section is built. Keep these true when the code changes.
 export const inspectNotes = {
   hero: "this headline is real text, split into letters with Motion. No canvas, so screen readers and résumé bots can read it.",
   about: "Apple's player only loads once you pick a song, so nothing is requested from Apple until then.",
-  experience: "the ball rolls along this line as you scroll, driven by Motion's useScroll. Newest role stays first, the way recruiters read a résumé.",
+  experience: "this line is drawn like a commit graph, and its head follows your scroll with Motion's useScroll. Newest role stays first, the way recruiters read a résumé.",
   process: "each stage lights up in turn as you scroll, like a CI run passing. With reduced motion on, all six are simply lit.",
-  projects: "each row is one real link, so keyboard focus gets the same shift and underline as a mouse.",
+  projects: "each row is one real link, so keyboard focus gets the same shift and underline as a mouse. The scroll animations only change transform and opacity, so they never force a layout.",
   skills: 'no skill percentages here on purpose. A bar reading "React 90%" claims something I can\'t measure.',
-  contact: "the net is a canvas that only draws while a shot is in the air, so an idle net costs nothing.",
+  booking: "the calendar only loads once you ask for it, so nothing is requested from the booking service until then.",
+  contact: "Copy email uses the Clipboard API, and opens your mail app instead if the browser blocks it.",
 };
-
-// The one Hunter x Hunter wink, shown last while Inspect is on.
-export const gyoNote = "focus your aura and the hidden writing shows. Feitan would have found this faster.";

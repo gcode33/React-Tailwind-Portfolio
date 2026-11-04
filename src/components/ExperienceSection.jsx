@@ -1,5 +1,6 @@
 import { useRef } from "react";
-import { Reveal } from "./Reveal";
+import { m } from "motion/react";
+import { ScrubIn } from "./ScrubIn";
 import { SectionHeading } from "./SectionHeading";
 import { TimelineTrack } from "./TimelineTrack";
 import { experience } from "@/data/profile";
@@ -24,10 +25,32 @@ const FixesDiff = ({ fixes }) => (
   </ul>
 );
 
+const Chips = m.ul;
+const Chip = m.li;
+const chipsIn = { hidden: {}, shown: { transition: { staggerChildren: 0.035 } } };
+const chipIn = { hidden: { opacity: 0, y: 8 }, shown: { opacity: 1, y: 0 } };
+
+// The tools appear one after another the first time they scroll into view.
+const TechList = ({ company, tech }) => (
+  <Chips
+    aria-label={`Technology used at ${company}`}
+    data-reveal
+    className="flex flex-wrap gap-1.5"
+    variants={chipsIn}
+    initial="hidden"
+    whileInView="shown"
+    viewport={{ once: true, margin: "0px 0px -40px 0px" }}
+  >
+    {tech.map((item) => (
+      <Chip key={item} data-reveal variants={chipIn} className="chip font-mono text-xs text-muted">
+        {item}
+      </Chip>
+    ))}
+  </Chips>
+);
+
 const marker = (i) => {
-  if (i === 0) return " · LIVE";
-  if (i === experience.length - 1) return " · KICK-OFF";
-  return "";
+  return i === 0 ? " · CURRENT" : "";
 };
 
 export const ExperienceSection = () => {
@@ -38,14 +61,14 @@ export const ExperienceSection = () => {
     <div className="container">
       <SectionHeading
           note="experience"
-        title="The season so far"
+        title="Experience"
         description="Backend services, front ends and the pipelines that keep them honest."
       />
 
       <ol ref={timelineRef} className="relative ml-0.5 flex flex-col gap-9 pl-7 md:pl-10">
         <TimelineTrack targetRef={timelineRef} />
         {experience.map((job, i) => (
-          <Reveal as="li" key={`${job.company}-${job.period}`} delay={i * 60} className="relative flex flex-col gap-3">
+          <ScrubIn as="li" key={`${job.company}-${job.period}`} y={56} data-role className="relative flex flex-col gap-3">
             <div>
               <p className={`mono-label ${i === 0 ? "text-accent" : "text-muted"}`}>
                 {job.period.toUpperCase()}
@@ -67,14 +90,8 @@ export const ExperienceSection = () => {
 
             {job.fixes && <FixesDiff fixes={job.fixes} />}
 
-            <ul aria-label={`Technology used at ${job.company}`} className="flex flex-wrap gap-1.5">
-              {job.tech.map((tech) => (
-                <li key={tech} className="chip font-mono text-xs text-muted">
-                  {tech}
-                </li>
-              ))}
-            </ul>
-          </Reveal>
+            <TechList company={job.company} tech={job.tech} />
+          </ScrubIn>
         ))}
       </ol>
     </div>

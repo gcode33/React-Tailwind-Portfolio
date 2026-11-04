@@ -27,16 +27,14 @@ describe("Inspect mode", () => {
     render(<Page />);
     expect(inspectButton().getAttribute("aria-pressed")).toBe("false");
     expect(screen.queryByText(/inspect:/)).toBeNull();
-    expect(screen.queryByText(/gyo:/)).toBeNull();
   });
 
-  it("reveals the notes and the one Feitan wink as real page text", () => {
+  it("reveals the notes as real page text", () => {
     render(<Page />);
     fireEvent.click(inspectButton());
 
     expect(inspectButton().getAttribute("aria-pressed")).toBe("true");
     expect(screen.getByText(/inspect: no skill percentages/)).toBeTruthy();
-    expect(screen.getByText(/gyo: .*Feitan/)).toBeTruthy();
   });
 
   it("tells screen readers what changed", () => {

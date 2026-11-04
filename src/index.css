@@ -1,32 +1,80 @@
 @import "tailwindcss";
 
-@theme {
-  --font-sans: "Instrument Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
-  --font-display: "Anton", Impact, "Arial Narrow", sans-serif;
+/* Self-hosted so no third party is involved in the first paint. */
+@font-face {
+  font-family: "Anton";
+  src: url("/fonts/anton-latin-400.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
 
-  /* Night pitch */
+@font-face {
+  font-family: "Instrument Sans";
+  src: url("/fonts/instrument-sans-latin-wght.woff2") format("woff2");
+  font-weight: 400 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/fonts/jetbrains-mono-latin-wght.woff2") format("woff2");
+  font-weight: 100 800;
+  font-display: swap;
+}
+
+/* System fonts resized to the width of the real ones, so text wraps the same way before and
+   after they load and nothing jumps. Numbers measured against Arial and Courier New. */
+@font-face {
+  font-family: "Anton Fallback";
+  src: local("Arial"), local("Roboto");
+  size-adjust: 90.3%;
+  ascent-override: 130.68%;
+  descent-override: 36.55%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Instrument Sans Fallback";
+  src: local("Arial"), local("Roboto");
+  size-adjust: 102.1%;
+  ascent-override: 95.01%;
+  descent-override: 24.49%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "JetBrains Mono Fallback";
+  src: local("Courier New"), local("Roboto Mono");
+  size-adjust: 99.98%;
+  ascent-override: 102.02%;
+  descent-override: 30%;
+  line-gap-override: 0%;
+}
+
+@theme {
+  --font-sans: "Instrument Sans", "Instrument Sans Fallback", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", "JetBrains Mono Fallback", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-display: "Anton", "Anton Fallback", Impact, "Arial Narrow", sans-serif;
+
+  /* Ground */
   --color-background: #0c1410;
   --color-subtle: #13201a;
   --color-border: #2a3a31;
   --color-border-strong: #3b4e43;
 
-  /* Chalk */
+  /* Text and lines */
   --color-foreground: #eef1e4;
   --color-soft: #d8dfd2;
   --color-muted: #a9b5a6;
 
-  /* Chelsea blue for fills, its tint for accents on dark ground */
-  --color-chelsea: #034694;
-  --color-chelsea-hover: #0556b5;
+  /* Blue for fills, its tint for accents on dark ground */
+  --color-brand: #034694;
+  --color-brand-hover: #0556b5;
   --color-accent: #7fb2ff;
 
   /* Engineering */
   --color-mint: #8fe3cf;
   --color-removed: #ffb4a6;
-
-  /* Rising Sun. One Feitan detail only, the last Inspect note. */
-  --color-ember: #ff8a5c;
 }
 
 @layer base {
@@ -99,7 +147,7 @@
 }
 
 @utility btn-primary {
-  @apply btn bg-chelsea text-white hover:bg-chelsea-hover;
+  @apply btn bg-brand text-white hover:bg-brand-hover;
 }
 
 @utility btn-ghost {
@@ -123,7 +171,9 @@
 
 /* Sections that were never scrolled into view should still print. */
 @media print {
-  [data-reveal] {
+  [data-reveal],
+  [data-scrub],
+  [data-scrub] span {
     opacity: 1 !important;
     transform: none !important;
   }

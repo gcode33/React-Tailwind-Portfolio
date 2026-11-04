@@ -7,9 +7,11 @@ import { ShipSection } from "@/components/ShipSection";
 import { ProjectSection } from "@/components/ProjectSection";
 import { SkillsSection } from "@/components/SkillsSection";
 import { ContactSection } from "@/components/ContactSection";
+import { BookingSection } from "@/components/BookingSection";
 import { Footer } from "@/components/Footer";
 import { SectionTransition } from "@/components/SectionTransition";
 import { Dock } from "@/components/Dock";
+import { ScrollProgress } from "@/components/ScrollProgress";
 
 export const Home = () => {
   // The browser tries to jump to a URL hash (e.g. /#projects) before React has rendered
@@ -27,6 +29,7 @@ export const Home = () => {
       >
         Skip to content
       </a>
+      <ScrollProgress />
       <SectionTransition />
       <Navbar />
       <main id="main" tabIndex={-1} className="outline-none">
@@ -37,6 +40,7 @@ export const Home = () => {
         <ProjectSection />
         <SkillsSection />
         <ContactSection />
+        <BookingSection />
       </main>
       <Footer />
       <Dock />

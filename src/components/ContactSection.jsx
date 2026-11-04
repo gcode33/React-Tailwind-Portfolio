@@ -1,10 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { useInView } from "motion/react";
-import { Check, Copy, Download, Github, Linkedin, Mail } from "lucide-react";
+import { CalendarDays, Check, Copy, Download, Github, Linkedin, Mail } from "lucide-react";
 import { DecodeText } from "./DecodeText";
-import { GoalNet } from "./GoalNet";
 import { InspectNote } from "./InspectNote";
-import { Reveal } from "./Reveal";
+import { ScrubIn } from "./ScrubIn";
 import { experience, profile } from "@/data/profile";
 
 const firstYear = Math.min(...experience.map((job) => new Date(job.start).getUTCFullYear()));
@@ -14,15 +12,6 @@ const linkClass = "inline-flex min-h-11 items-center gap-2 break-all text-accent
 export const ContactSection = () => {
   const [copied, setCopied] = useState(false);
   const resetTimer = useRef(null);
-  const sectionRef = useRef(null);
-  const netRef = useRef(null);
-  const seen = useInView(sectionRef, { once: true, amount: 0.5 });
-
-  // One shot the first time the section comes into view, so everyone sees the net move.
-  useEffect(() => {
-    if (seen) netRef.current?.shoot();
-  }, [seen]);
-
   useEffect(() => () => clearTimeout(resetTimer.current), []);
 
   const copyEmail = async () => {
@@ -37,19 +26,17 @@ export const ContactSection = () => {
   };
 
   return (
-    <section ref={sectionRef} id="contact" className="relative overflow-hidden border-t border-border py-20 md:py-24">
-      <GoalNet ref={netRef} />
+    <section id="contact" className="border-t border-border py-20 md:py-24">
       <div className="container relative grid items-center gap-12 lg:grid-cols-[1.3fr_1fr] lg:gap-14">
-        <Reveal className="flex flex-col gap-4">
+        <ScrubIn y={48} className="flex flex-col gap-4">
           <h2 className="display text-[clamp(3.5rem,8vw,6.5rem)] leading-none">
-            <DecodeText text="Put it in the net." />
+            <DecodeText text="Let's work together." />
           </h2>
-          <p className="text-soft">Hiring, or want to talk code, Chelsea or 70s jazz funk? Send me a note.</p>
+          <p className="text-soft">Hiring, or want to talk about software? Send me a note.</p>
           <InspectNote id="contact" />
           <div className="flex flex-wrap gap-3">
             <a
               href={`mailto:${profile.email}`}
-              onClick={(event) => netRef.current?.shoot(event.currentTarget)}
               className="btn-primary"
             >
               <Mail aria-hidden className="h-4 w-4" />
@@ -59,13 +46,19 @@ export const ContactSection = () => {
               {copied ? <Check aria-hidden className="h-4 w-4" /> : <Copy aria-hidden className="h-4 w-4" />}
               <span aria-live="polite">{copied ? "Email copied" : "Copy email"}</span>
             </button>
+            {profile.bookingUrl && (
+              <a href="#book" className="btn-ghost">
+                <CalendarDays aria-hidden className="h-4 w-4" />
+                Book a time
+              </a>
+            )}
           </div>
-        </Reveal>
+        </ScrubIn>
 
-        <Reveal delay={100} className="flex flex-col gap-3 border border-foreground bg-subtle p-6">
+        <ScrubIn y={88} className="flex flex-col gap-3 border border-foreground bg-subtle p-6">
           <div className="flex justify-between gap-3 font-mono text-xs text-muted">
-            <span>DEVELOPER LICENCE</span>
-            <span>EST. {firstYear}</span>
+            <span>CONTACT</span>
+            <span>BUILDING SINCE {firstYear}</span>
           </div>
           <p className="display text-4xl leading-[1.1]">{profile.name}.</p>
           <p className="text-[15px] text-soft">
@@ -89,7 +82,7 @@ export const ContactSection = () => {
               Download résumé
             </a>
           </div>
-        </Reveal>
+        </ScrubIn>
       </div>
     </section>
   );

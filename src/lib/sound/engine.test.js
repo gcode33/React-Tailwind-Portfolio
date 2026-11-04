@@ -16,7 +16,7 @@ const engine = (overrides = {}) => createSoundEngine({ createContext, storage, e
 beforeEach(() => {
   ctx = { currentTime: 10, destination: {}, state: "running", resume: vi.fn() };
   storage = fakeStorage();
-  effects = { tick: vi.fn(), kick: vi.fn(), netHit: vi.fn(), whistle: vi.fn() };
+  effects = { tick: vi.fn(), jump: vi.fn() };
   createContext = vi.fn(() => ctx);
   Object.defineProperty(document, "hidden", { configurable: true, value: false });
 });
@@ -24,19 +24,19 @@ beforeEach(() => {
 describe("before opt-in", () => {
   it("creates no audio, whatever else happens on the page", () => {
     const sound = engine();
-    sound.effect("kick");
+    sound.effect("jump");
     sound.openExternalPlayer("song");
     sound.closeExternalPlayer();
 
     expect(createContext).not.toHaveBeenCalled();
-    expect(effects.kick).not.toHaveBeenCalled();
+    expect(effects.jump).not.toHaveBeenCalled();
     expect(sound.getSnapshot().status).toBe("off");
   });
 
   it("offers to resume after a remembered yes, but does not start by itself", () => {
-    storage = fakeStorage({ "match-day-sound": "on" });
+    storage = fakeStorage({ "portfolio-sound": "on" });
     const sound = engine();
-    sound.effect("kick");
+    sound.effect("jump");
 
     expect(sound.getSnapshot()).toMatchObject({ status: "off", resumable: true });
     expect(createContext).not.toHaveBeenCalled();
@@ -65,20 +65,12 @@ describe("turning sound on", () => {
 
   it("remembers the choice", () => {
     engine().toggle();
-    expect(storage.values.get("match-day-sound")).toBe("on");
+    expect(storage.values.get("portfolio-sound")).toBe("on");
   });
 
-  it("blows the whistle on the first opt-in only, then confirms with a tick", () => {
-    const sound = engine();
-    sound.toggle();
-    expect(effects.whistle).toHaveBeenCalledTimes(1);
-    expect(effects.tick).not.toHaveBeenCalled();
-
-    sound.toggle();
-    sound.toggle();
+  it("confirms with a short sound, so it doesn't look broken", () => {
     engine().toggle();
-    expect(effects.whistle).toHaveBeenCalledTimes(1);
-    expect(effects.tick).toHaveBeenCalled();
+    expect(effects.tick).toHaveBeenCalledTimes(1);
   });
 
   it("reuses one audio context", () => {
@@ -101,11 +93,11 @@ describe("turning sound off", () => {
     const sound = engine();
     sound.toggle();
     sound.toggle();
-    sound.effect("kick");
+    sound.effect("jump");
 
-    expect(effects.kick).not.toHaveBeenCalled();
+    expect(effects.jump).not.toHaveBeenCalled();
     expect(sound.getSnapshot()).toMatchObject({ status: "off", resumable: false });
-    expect(storage.values.get("match-day-sound")).toBe("off");
+    expect(storage.values.get("portfolio-sound")).toBe("off");
   });
 });
 
@@ -113,8 +105,8 @@ describe("effects", () => {
   it("play once sound is on", () => {
     const sound = engine();
     sound.toggle();
-    sound.effect("kick");
-    expect(effects.kick).toHaveBeenCalledTimes(1);
+    sound.effect("jump");
+    expect(effects.jump).toHaveBeenCalledTimes(1);
   });
 
   it("collapse a burst of ticks into one", () => {
@@ -133,20 +125,20 @@ describe("effects", () => {
     const sound = engine();
     sound.toggle();
     sound.openExternalPlayer("breeze");
-    sound.effect("kick");
-    expect(effects.kick).not.toHaveBeenCalled();
+    sound.effect("jump");
+    expect(effects.jump).not.toHaveBeenCalled();
 
     sound.closeExternalPlayer();
-    sound.effect("kick");
-    expect(effects.kick).toHaveBeenCalledTimes(1);
+    sound.effect("jump");
+    expect(effects.jump).toHaveBeenCalledTimes(1);
   });
 
   it("stay quiet in a hidden tab", () => {
     const sound = engine();
     sound.toggle();
     Object.defineProperty(document, "hidden", { configurable: true, value: true });
-    sound.effect("kick");
-    expect(effects.kick).not.toHaveBeenCalled();
+    sound.effect("jump");
+    expect(effects.jump).not.toHaveBeenCalled();
   });
 
   it("wake the audio up if the system suspended it", () => {
@@ -154,7 +146,7 @@ describe("effects", () => {
     sound.toggle();
     ctx.resume.mockClear();
     ctx.state = "suspended";
-    sound.effect("kick");
+    sound.effect("jump");
     expect(ctx.resume).toHaveBeenCalledTimes(1);
   });
 });

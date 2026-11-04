@@ -84,7 +84,7 @@ export const Navbar = () => {
         )}
       >
         <nav aria-label="Main" className="container flex items-center justify-between">
-          <a href="#hero" className="font-mono text-sm font-medium">
+          <a href="#hero" className="inline-flex min-h-11 items-center font-mono text-sm font-medium">
             <span className="text-accent">~/</span>
             {profile.name.split(" ").slice(0, 2).join("-").toLowerCase()}
           </a>
@@ -117,7 +117,7 @@ export const Navbar = () => {
               href={profile.resume}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-ghost ml-2 hidden min-h-0 px-4 py-2 md:inline-flex"
+              className="btn-ghost ml-2 hidden px-4 py-2 md:inline-flex"
             >
               Résumé
             </a>

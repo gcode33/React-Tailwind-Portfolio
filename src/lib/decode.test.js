@@ -5,7 +5,7 @@ const hash = () => "#";
 
 describe("decodeFrame", () => {
   it("starts as all noise but keeps word breaks, so lines wrap the same way", () => {
-    expect(decodeFrame("The season", 0, hash)).toBe("### ######");
+    expect(decodeFrame("The system", 0, hash)).toBe("### ######");
   });
 
   it("resolves the text from left to right", () => {

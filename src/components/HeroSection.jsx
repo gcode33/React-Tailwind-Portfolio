@@ -1,7 +1,10 @@
+import { useRef } from "react";
+import { m, useTransform } from "motion/react";
 import { Download, Github, Linkedin, Mail, MapPin } from "lucide-react";
-import { experience, personal, profile, projects } from "@/data/profile";
+import { useScrub } from "@/lib/useScrub";
+import { experience, profile, projects } from "@/data/profile";
 import { Bracketed } from "./Graphics";
-import { PitchLines } from "./PitchLines";
+import { SchematicLines } from "./SchematicLines";
 import { HeroName } from "./HeroName";
 import { InspectNote } from "./InspectNote";
 import { Reveal } from "./Reveal";
@@ -20,13 +23,22 @@ const stats = [
   { value: projects.length, label: "Featured projects" },
 ];
 
-export const HeroSection = () => (
-  <section id="hero" className="relative overflow-hidden border-b border-border">
-    <PitchLines />
+const HeroContent = m.div;
 
-    <div className="container relative flex flex-col gap-6 pt-32 pb-16 md:pt-40 md:pb-20">
+export const HeroSection = () => {
+  const sectionRef = useRef(null);
+  // The content eases down and fades as you scroll away, so the next section takes over.
+  const progress = useScrub(sectionRef, ["start start", "end start"], { rest: 0 });
+  const y = useTransform(progress, [0, 1], [0, 120]);
+  const opacity = useTransform(progress, [0, 0.85], [1, 0.1]);
+
+  return (
+  <section ref={sectionRef} id="hero" className="relative overflow-hidden border-b border-border">
+    <SchematicLines />
+
+    <HeroContent data-hero-content style={{ y, opacity }} className="container relative flex flex-col gap-6 pt-32 pb-16 md:pt-40 md:pb-20">
       <Reveal as="p" className="mono-label text-accent">
-        NO. {personal.number} · LIVE AT {profile.currently.toUpperCase()} · {profile.location.toUpperCase()}
+        CURRENTLY AT {profile.currently.toUpperCase()} · {profile.location.toUpperCase()}
       </Reveal>
 
       <HeroName />
@@ -40,7 +52,7 @@ export const HeroSection = () => (
       <Reveal delay={450} className="flex flex-wrap items-center gap-x-5 gap-y-3">
         <Bracketed>
           <a href="#projects" className="btn-primary mono-label">
-            KICK OFF · VIEW MY WORK
+            VIEW MY WORK
           </a>
         </Bracketed>
         <a href={profile.resume} download className="btn-ghost">
@@ -73,12 +85,16 @@ export const HeroSection = () => (
 
       <Reveal as="dl" delay={650} className="mt-6 grid grid-cols-3 border-y border-border">
         {stats.map((stat, i) => (
-          <div key={stat.label} className={i === 0 ? "py-3.5 pr-4" : "border-l border-border px-4 py-3.5"}>
-            <dd className="display text-4xl leading-tight">{stat.value}</dd>
+          <div
+            key={stat.label}
+            className={`flex flex-col-reverse justify-end ${i === 0 ? "py-3.5 pr-4" : "border-l border-border px-4 py-3.5"}`}
+          >
             <dt className="text-[13px] text-muted">{stat.label}</dt>
+            <dd className="display text-4xl leading-tight">{stat.value}</dd>
           </div>
         ))}
       </Reveal>
-    </div>
+    </HeroContent>
   </section>
-);
+  );
+};
