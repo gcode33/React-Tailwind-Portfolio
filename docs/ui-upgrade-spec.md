@@ -91,6 +91,7 @@ Dark only to start. The light theme toggle is removed.
 | Projects | Full-width track rows | Side A and B numbering | Row hover shifts type, soft tick if sound is on |
 | Skills | System diagram: Frontend to Backend to Data, with Testing & Tools, AI & Tooling and Languages below | Engineering theme | Selected part's tools animate in with a shared layout |
 | Contact | Headline, button, licence-style card, build strip | "Put it in the net", net ripple | Ball shot on click |
+| Let's get in touch (added 2026-11-04) | Heading, button, click-to-load booking calendar, plain link | None | Hidden until a booking link is set |
 | Dock | Sticky bottom bar | Sound and Inspect controls | None |
 
 **Inspect mode** replaces the earlier Gyo idea. A dock button reveals short notes on how each section is built. The last note is the one HxH wink.
