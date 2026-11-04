@@ -92,7 +92,7 @@ Dark only to start. The light theme toggle is removed.
 | Projects | Full-width track rows | Side A and B numbering | Row hover shifts type, soft tick if sound is on |
 | Skills | System diagram: Frontend to Backend to Data, with Testing & Tools, AI & Tooling and Languages below | Engineering theme | Selected part's tools animate in with a shared layout |
 | Contact | Headline, button, licence-style card, build strip | "Put it in the net", net ripple | Ball shot on click |
-| Dock | Sticky bottom bar | Sound and Inspect controls | Equalizer bars move only while playing |
+| Dock | Sticky bottom bar | Sound and Inspect controls | None |
 
 **Inspect mode** replaces the earlier Gyo idea. A dock button reveals short notes on how each section is built. The last note is the one HxH wink.
 
@@ -108,7 +108,7 @@ No skill percentages, because they would claim something George can't measure.
 | --- | --- | --- | --- |
 | Animation | **Motion** (`motion` 14.9.0) | MIT | Free core library. Motion+ is a paid add-on and isn't needed. Fits React directly: `useScroll`, `AnimatePresence`, layout animations. |
 | Smooth scroll | Lenis 1.3.27, only if native scrolling feels rough in testing | MIT | Desktop only |
-| Sound | Browser Web Audio API, no library | n/a | Gain and low-pass filter nodes, effects synthesized in code, so no licence and almost no download |
+| Sound | Browser Web Audio API, no library | n/a | Effects synthesized in code, so no licence and almost no download |
 | Net ripple | SVG or Canvas 2D | n/a | No 3D library |
 
 **Why Motion over GSAP.** GSAP is also free for this use, including its plugins, and it's what edolus uses. But its licence is Webflow's own "standard no charge" licence rather than open source, and Motion suits React components better. GSAP stays as the fallback if a scrubbed timeline gets too hard to manage in Motion.
@@ -131,20 +131,15 @@ Visitors press play and hear previews through Apple. Signed-out visitors get 30-
 
 **Favourite Songs is dropped.** Claude can't read it from this Mac, and George said not to worry about it, so the site embeds these five songs one at a time.
 
-### Background music (dock, licensed)
+### Background music
 
-Instrumental jazz funk and lounge in the spirit of George's picks, from Pixabay. Its summary says no attribution is needed but forbids distributing content as-is. So: stream only, no download link, and read the full terms before shipping.
-
-**Chosen by George:** [Jazz Funk Groove Instrumental](https://pixabay.com/music/smooth-jazz-jazz-funk-groove-instrumental-222618/) by ArtManzh, 4:48, tagged smooth jazz, funk and guitar.
+**Dropped by George on 2026-11-04.** There is no background track, scroll filter or music licence to manage. It can come back later as its own piece of work, and the first draft of PR #12 has a working version in its history.
 
 ### Sound rules
 
-- Off by default. Nothing plays until the visitor presses the dock button, and the choice is remembered.
-- The audio file downloads only after opt-in, so visitors who never press it pay nothing.
-- Starting Apple's player pauses the background track, so two songs never overlap.
-- Music fades in over 2s and fades out over 0.6s on toggle. It pauses when the tab is hidden.
-- The low-pass filter opens from muffled at the top to full at Contact.
-- Effects, all synthesized: soft kick (section jump), thump plus net swish (contact), faint tick (decode, row hover, pipeline stage), optional referee whistle (first opt-in).
+- Off by default. Nothing plays until the visitor presses the dock button, and the choice is remembered. A remembered "on" offers to resume and never starts by itself.
+- Effects stay quiet while Apple's player is open or the tab is hidden.
+- Effects, all synthesized: soft kick (section jump), thump plus net swish (contact), faint tick (decode, row hover, pipeline stage), referee whistle (first opt-in).
 - No crowd noise, commentary or anime audio.
 
 ## 7. Third-party rules
@@ -180,9 +175,9 @@ Each phase is one PR, with a Vercel preview to review before the next.
 | 1 | Tokens, fonts, Motion, shared reduced-motion setup, new section layouts including How I ship and the system diagram, dark only | All sections match the boards with no special effects, tests pass at phone and desktop width |
 | 2 | Hero stagger, decode headings, bracket button, through-ball transition | Works with mouse, keyboard and reduced motion |
 | 3 | Pitch lines, ball on timeline, pipeline lights, track rows, net ripple | Smooth at 60fps on a mid-range phone profile |
-| 4 | Dock, audio engine, filter, effects, Apple Music embed | Sound stays off until opted in, and works on iOS Safari |
+| 4 | Dock, audio engine, effects, Apple Music embed | Sound stays off until opted in, and works on iOS Safari |
 | 5 | Inspect mode, build strip, HxH touches | Keyboard usable, build values are real |
-| 6 | Lighthouse, screen reader pass, device checks, track licence recheck | Section 8 budgets all met |
+| 6 | Lighthouse, screen reader pass, device checks | Section 8 budgets all met |
 
 ### Phase 0 findings (2026-11-03)
 
