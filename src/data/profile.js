@@ -145,3 +145,17 @@ export const personal = {
   ],
   rewatching: "Hunter x Hunter. Feitan first, then Gon, Killua, Kurapika and Leorio.",
 };
+
+// Inspect mode: how each section is built. Keep these true when the code changes.
+export const inspectNotes = {
+  hero: "this headline is real text, split into letters with Motion. No canvas, so screen readers and résumé bots can read it.",
+  about: "Apple's player only loads once you pick a song, so nothing is requested from Apple until then.",
+  experience: "the ball rolls along this line as you scroll, driven by Motion's useScroll. Newest role stays first, the way recruiters read a résumé.",
+  process: "each stage lights up in turn as you scroll, like a CI run passing. With reduced motion on, all six are simply lit.",
+  projects: "each row is one real link, so keyboard focus gets the same shift and underline as a mouse.",
+  skills: 'no skill percentages here on purpose. A bar reading "React 90%" claims something I can\'t measure.',
+  contact: "the net is a canvas that only draws while a shot is in the air, so an idle net costs nothing.",
+};
+
+// The one Hunter x Hunter wink, shown last while Inspect is on.
+export const gyoNote = "focus your aura and the hidden writing shows. Feitan would have found this faster.";

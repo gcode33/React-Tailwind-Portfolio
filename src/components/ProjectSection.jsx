@@ -9,7 +9,7 @@ const tick = () => sound.effect("tick");
 export const ProjectSection = () => (
   <section id="projects" className="border-y border-border bg-subtle py-20 md:py-24">
     <div className="container">
-      <SectionHeading title="Tracklist" description="Side projects where I explore new stacks, from developer tooling to real-time apps." />
+      <SectionHeading note="projects" title="Tracklist" description="Side projects where I explore new stacks, from developer tooling to real-time apps." />
 
       <ol className="border-t border-border">
         {projects.map((project, i) => (

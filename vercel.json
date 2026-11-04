@@ -1,4 +1,5 @@
 {
+  "buildCommand": "npm run build",
   "redirects": [
     { "source": "/GeorgeFotabongJr_CV.pdf", "destination": "/GeorgeFotabong_Resume.pdf", "permanent": true }
   ],
