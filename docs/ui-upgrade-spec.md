@@ -37,7 +37,6 @@ We take the techniques and write our own code and assets. Edolus's code, models,
 | Per-letter headline | Hero name staggered in with Motion |
 | Bracket-corner button | Main call to action |
 | Sound tied to reveals | A small effects set, opt-in |
-| Stem mix by scroll | A low-pass filter opening with scroll (we have one track, not stems) |
 | Grain and line texture | Light grain plus chalk pitch lines |
 
 | Leave | Why |
@@ -199,7 +198,7 @@ Vercel's Standard Protection covers every address except production domains, so 
 | Theme | Dark only |
 | Club, position, number | Chelsea, striker, 3 (years of experience) |
 | Character | Feitan |
-| Background track | Jazz Funk Groove Instrumental |
+| Background track | None, dropped on 2026-11-04 |
 | George's songs | Five songs embedded individually, no Favourite Songs playlist |
 
 ### Still open
@@ -210,7 +209,6 @@ Vercel's Standard Protection covers every address except production domains, so 
 
 - [Motion pricing](https://motion.dev/pricing), [Motion+](https://motion.dev/plus); `npm view motion license` returned MIT
 - [GSAP standard licence](https://gsap.com/standard-license)
-- [Pixabay licence summary](https://pixabay.com/service/license-summary/)
 - [Apple Music marketing tools](https://artists.apple.com/support/1117-apple-music-marketing-tools)
 - [MusicKit on the web](https://js-cdn.music.apple.com/musickit/v1/index.html)
 - Track links from the iTunes Search API, queried 2026-11-03
