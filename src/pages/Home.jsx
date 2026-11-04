@@ -7,6 +7,7 @@ import { ShipSection } from "@/components/ShipSection";
 import { ProjectSection } from "@/components/ProjectSection";
 import { SkillsSection } from "@/components/SkillsSection";
 import { ContactSection } from "@/components/ContactSection";
+import { BookingSection } from "@/components/BookingSection";
 import { Footer } from "@/components/Footer";
 import { SectionTransition } from "@/components/SectionTransition";
 import { Dock } from "@/components/Dock";
@@ -37,6 +38,7 @@ export const Home = () => {
         <ProjectSection />
         <SkillsSection />
         <ContactSection />
+        <BookingSection />
       </main>
       <Footer />
       <Dock />

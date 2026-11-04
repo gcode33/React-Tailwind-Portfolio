@@ -73,9 +73,12 @@ export const HeroSection = () => (
 
       <Reveal as="dl" delay={650} className="mt-6 grid grid-cols-3 border-y border-border">
         {stats.map((stat, i) => (
-          <div key={stat.label} className={i === 0 ? "py-3.5 pr-4" : "border-l border-border px-4 py-3.5"}>
-            <dd className="display text-4xl leading-tight">{stat.value}</dd>
+          <div
+            key={stat.label}
+            className={`flex flex-col-reverse justify-end ${i === 0 ? "py-3.5 pr-4" : "border-l border-border px-4 py-3.5"}`}
+          >
             <dt className="text-[13px] text-muted">{stat.label}</dt>
+            <dd className="display text-4xl leading-tight">{stat.value}</dd>
           </div>
         ))}
       </Reveal>

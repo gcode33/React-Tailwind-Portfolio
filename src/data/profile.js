@@ -9,6 +9,8 @@ export const profile = {
   github: "https://github.com/gcode33",
   linkedin: "https://www.linkedin.com/in/george-fotabong-b10b92202/",
   resume: "/GeorgeFotabong_Resume.pdf",
+  // George's public booking page. Set it in .env.production. Until then the section stays hidden.
+  bookingUrl: import.meta.env.VITE_BOOKING_URL || null,
   currently: "Lynked Inc.",
   summary:
     "Software developer with production experience across Node/TypeScript, .NET and Python microservices.",
@@ -154,6 +156,7 @@ export const inspectNotes = {
   process: "each stage lights up in turn as you scroll, like a CI run passing. With reduced motion on, all six are simply lit.",
   projects: "each row is one real link, so keyboard focus gets the same shift and underline as a mouse.",
   skills: 'no skill percentages here on purpose. A bar reading "React 90%" claims something I can\'t measure.',
+  booking: "the calendar only loads once you ask for it, so nothing is requested from the booking service until then.",
   contact: "the net is a canvas that only draws while a shot is in the air, so an idle net costs nothing.",
 };
 

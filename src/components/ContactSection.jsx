@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useInView } from "motion/react";
-import { Check, Copy, Download, Github, Linkedin, Mail } from "lucide-react";
+import { CalendarDays, Check, Copy, Download, Github, Linkedin, Mail } from "lucide-react";
 import { DecodeText } from "./DecodeText";
 import { GoalNet } from "./GoalNet";
 import { InspectNote } from "./InspectNote";
@@ -59,6 +59,12 @@ export const ContactSection = () => {
               {copied ? <Check aria-hidden className="h-4 w-4" /> : <Copy aria-hidden className="h-4 w-4" />}
               <span aria-live="polite">{copied ? "Email copied" : "Copy email"}</span>
             </button>
+            {profile.bookingUrl && (
+              <a href="#book" className="btn-ghost">
+                <CalendarDays aria-hidden className="h-4 w-4" />
+                Book a time
+              </a>
+            )}
           </div>
         </Reveal>
 
