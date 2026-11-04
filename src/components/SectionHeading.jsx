@@ -1,11 +1,8 @@
 import { Reveal } from "./Reveal";
 
-export const SectionHeading = ({ index, eyebrow, title, description }) => (
-  <Reveal className="mb-12 max-w-2xl">
-    <p className="mb-3 font-mono text-sm text-accent">
-      {index}. {eyebrow}
-    </p>
-    <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">{title}</h2>
-    {description && <p className="mt-4 text-muted">{description}</p>}
+export const SectionHeading = ({ title, description }) => (
+  <Reveal className="mb-10 max-w-3xl md:mb-14">
+    <h2 className="display text-5xl leading-[1.05] md:text-[56px]">{title}</h2>
+    {description && <p className="mt-4 text-soft">{description}</p>}
   </Reveal>
 );

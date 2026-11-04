@@ -1,60 +1,33 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark *));
-
 @theme {
-  --font-sans: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-sans: "Instrument Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-display: "Anton", Impact, "Arial Narrow", sans-serif;
 
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-muted: var(--muted);
-  --color-subtle: var(--subtle);
-  --color-card: var(--card);
-  --color-border: var(--border);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
+  /* Night pitch */
+  --color-background: #0c1410;
+  --color-subtle: #13201a;
+  --color-border: #2a3a31;
+  --color-border-strong: #3b4e43;
 
-  --animate-fade-up: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
-  --animate-pulse-dot: pulse-dot 2s ease-out infinite;
+  /* Chalk */
+  --color-foreground: #eef1e4;
+  --color-soft: #d8dfd2;
+  --color-muted: #a9b5a6;
 
-  @keyframes fade-up {
-    from { opacity: 0; transform: translateY(16px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+  /* Chelsea blue for fills, its tint for accents on dark ground */
+  --color-chelsea: #034694;
+  --color-chelsea-hover: #0556b5;
+  --color-accent: #7fb2ff;
 
-  @keyframes pulse-dot {
-    0% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--color-emerald-400) 60%, transparent); }
-    100% { box-shadow: 0 0 0 8px transparent; }
-  }
+  /* Engineering */
+  --color-mint: #8fe3cf;
+  --color-removed: #ffb4a6;
 }
 
 @layer base {
   :root {
-    --background: #fafafa;
-    --foreground: #0a0a0b;
-    --muted: #52525b;
-    --subtle: #f4f4f5;
-    --card: #ffffff;
-    --border: #e4e4e7;
-    --accent: #4f46e5;
-    --accent-foreground: #ffffff;
-    --glow: rgba(79, 70, 229, 0.12);
-    --dot: rgba(10, 10, 11, 0.08);
-    color-scheme: light;
-  }
-
-  .dark {
-    --background: #09090b;
-    --foreground: #fafafa;
-    --muted: #a1a1aa;
-    --subtle: #18181b;
-    --card: #111113;
-    --border: #27272a;
-    --accent: #818cf8;
-    --accent-foreground: #09090b;
-    --glow: rgba(129, 140, 248, 0.16);
-    --dot: rgba(250, 250, 250, 0.07);
     color-scheme: dark;
   }
 
@@ -68,89 +41,59 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased transition-colors duration-300;
+    @apply bg-background text-foreground font-sans antialiased;
   }
 
   ::selection {
-    background: color-mix(in oklab, var(--accent) 30%, transparent);
+    background: color-mix(in oklab, var(--color-accent) 35%, transparent);
   }
 
   :focus-visible {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--color-mint);
     outline-offset: 3px;
-    border-radius: 6px;
+  }
+
+  h1,
+  h2 {
+    text-wrap: balance;
   }
 }
 
 @utility container {
   margin-inline: auto;
   padding-inline: 1.25rem;
-  max-width: 72rem;
+  max-width: 77.5rem;
 
   @media (width >= 768px) {
     padding-inline: 2rem;
   }
 }
 
-/* Faint dot grid that fades out toward the bottom of the hero. */
-@utility bg-dots {
-  background-image: radial-gradient(var(--dot) 1px, transparent 1px);
-  background-size: 22px 22px;
-  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+/* Condensed stadium-board type for headings. */
+@utility display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  text-transform: uppercase;
 }
 
-@utility text-gradient {
-  background: linear-gradient(120deg, var(--foreground) 30%, var(--accent));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+@utility mono-label {
+  @apply font-mono text-[13px] tracking-[0.08em];
 }
 
 @utility chip {
-  @apply inline-flex items-center rounded-md border border-border bg-subtle px-2.5 py-1 font-mono text-xs text-muted;
+  @apply inline-flex items-center border border-border-strong px-2.5 py-1 text-sm;
 }
 
 @utility btn {
-  @apply inline-flex items-center justify-center gap-2 rounded-lg px-5 py-2.5 text-sm font-medium transition-all duration-200 active:scale-[0.98];
+  @apply inline-flex min-h-11 items-center justify-center gap-2 px-6 py-3 text-sm font-medium transition-colors duration-200;
 }
 
 @utility btn-primary {
-  @apply btn bg-foreground text-background hover:opacity-90 hover:-translate-y-0.5 hover:shadow-lg;
+  @apply btn bg-chelsea text-white hover:bg-chelsea-hover;
 }
 
 @utility btn-ghost {
-  @apply btn border border-border bg-card text-foreground hover:border-accent/60 hover:-translate-y-0.5;
-}
-
-@utility card {
-  @apply rounded-2xl border border-border bg-card transition-all duration-300;
-}
-
-@utility card-hover {
-  @apply hover:-translate-y-1 hover:border-accent/40 hover:shadow-[0_12px_40px_-12px_var(--glow)];
-}
-
-/* Scroll-reveal: elements start hidden and animate in once visible. This uses an
-   animation (not a transition) so it doesn't override the `transition` set by card
-   utilities, and `backwards` fill so it releases `translate` for hover lifts afterwards. */
-.reveal {
-  opacity: 0;
-}
-
-.reveal.is-visible {
-  opacity: 1;
-  animation: reveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) var(--delay, 0ms) backwards;
-}
-
-@keyframes reveal {
-  from {
-    opacity: 0;
-    translate: 0 16px;
-  }
-  to {
-    opacity: 1;
-    translate: 0 0;
-  }
+  @apply btn border border-foreground text-foreground hover:bg-foreground hover:text-background;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -166,16 +109,12 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-
-  .reveal {
-    opacity: 1;
-  }
 }
 
 /* Sections that were never scrolled into view should still print. */
 @media print {
-  .reveal {
+  [data-reveal] {
     opacity: 1 !important;
-    animation: none !important;
+    transform: none !important;
   }
 }

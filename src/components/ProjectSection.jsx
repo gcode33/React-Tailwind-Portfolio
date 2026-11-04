@@ -1,120 +1,42 @@
-import { ArrowUpRight, GitPullRequest, Github, Rocket } from "lucide-react";
+import { ArrowUpRight, Github } from "lucide-react";
 import { Reveal } from "./Reveal";
 import { SectionHeading } from "./SectionHeading";
 import { profile, projects } from "@/data/profile";
 
-const icons = { rocket: Rocket, git: GitPullRequest };
-
-// The first project is featured full-width. If that leaves an odd number of cards, the
-// last one also spans the row so it isn't stranded alone in the two-column grid.
-const isWide = (i) => i === 0 || (i === projects.length - 1 && (projects.length - 1) % 2 === 1);
-
-// Projects without a screenshot get a designed header instead of an empty box.
-const ProjectCover = ({ project }) => {
-  if (project.image) {
-    return (
-      <img
-        src={project.image}
-        alt=""
-        width={1400}
-        height={716}
-        loading="lazy"
-        decoding="async"
-        className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-      />
-    );
-  }
-
-  const Icon = icons[project.icon] ?? Rocket;
-  return (
-    <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
-      <div aria-hidden className="bg-dots absolute inset-0 [mask-image:none]" />
-      <div
-        aria-hidden
-        className="absolute inset-0 transition-opacity duration-500 group-hover:opacity-70"
-        style={{ background: "radial-gradient(circle at 30% 20%, var(--glow), transparent 70%)" }}
-      />
-      <div className="relative flex flex-col items-center gap-3">
-        <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-border bg-card text-accent shadow-sm transition-transform duration-500 group-hover:-translate-y-1 group-hover:rotate-[-4deg]">
-          <Icon className="h-7 w-7" />
-        </div>
-        <p className="font-mono text-xs text-muted">{project.tags.slice(0, 3).join(" · ")}</p>
-      </div>
-    </div>
-  );
-};
-
 export const ProjectSection = () => (
-  <section id="projects" className="py-24 md:py-32">
+  <section id="projects" className="border-y border-border bg-subtle py-20 md:py-24">
     <div className="container">
-      <SectionHeading
-        index="03"
-        eyebrow="Projects"
-        title="Things I've built."
-        description="Side projects where I explore new stacks — from developer tooling to real-time apps."
-      />
+      <SectionHeading title="Tracklist" description="Side projects where I explore new stacks, from developer tooling to real-time apps." />
 
-      <div className="grid gap-6 md:grid-cols-2">
-        {projects.map((project, i) => {
-          const wide = isWide(i);
-          return (
-          <Reveal
-            key={project.title}
-            delay={(i % 2) * 100}
-            className={wide ? "md:col-span-2" : undefined}
-          >
+      <ol className="border-t border-border">
+        {projects.map((project, i) => (
+          <Reveal as="li" key={project.title} delay={i * 50} className="border-b border-border">
             <a
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${project.title}: view source on GitHub`}
-              className={`card card-hover group flex h-full flex-col overflow-hidden ${
-                wide ? "md:flex-row" : ""
-              }`}
+              className="group grid grid-cols-[2.75rem_minmax(0,1fr)] items-baseline gap-x-4 gap-y-2 py-5 md:grid-cols-[3.5rem_minmax(0,1.1fr)_minmax(0,1.6fr)_4rem] md:gap-x-6"
             >
-              <div
-                className={`relative aspect-[16/9] overflow-hidden border-b border-border bg-subtle ${
-                  wide ? "md:aspect-auto md:min-h-72 md:w-1/2 md:border-r md:border-b-0" : ""
-                }`}
-              >
-                <ProjectCover project={project} />
+              <span className="font-mono text-sm text-accent">{project.side}</span>
+              <h3 className="display text-[32px] leading-[1.15] transition-colors duration-200 group-hover:text-accent">
+                {project.title}
+              </h3>
+              <div className="col-start-2 md:col-start-auto">
+                <p className="text-[15px] text-soft">{project.description}</p>
+                <p className="mt-1 font-mono text-xs text-muted">{project.tags.join(" · ")}</p>
               </div>
-
-              <div className={`flex flex-1 flex-col p-6 ${wide ? "md:justify-center md:p-10" : ""}`}>
-                <div className="flex items-start justify-between gap-4">
-                  <h3 className={`font-semibold tracking-tight ${wide ? "text-2xl" : "text-xl"}`}>
-                    {project.title}
-                  </h3>
-                  <span className="font-mono text-xs text-muted">{project.year}</span>
-                </div>
-
-                <p className="mt-3 leading-relaxed text-muted">{project.description}</p>
-
-                <div className="mt-5 flex flex-wrap gap-1.5">
-                  {project.tags.map((tag) => (
-                    <span key={tag} className="chip">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
-                <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-foreground md:mt-auto md:pt-6">
-                  <Github className="h-4 w-4" />
-                  View source
-                  <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </span>
-              </div>
+              <span className="col-start-2 font-mono text-sm text-muted md:col-start-auto">{project.year}</span>
             </a>
           </Reveal>
-          );
-        })}
-      </div>
+        ))}
+      </ol>
 
-      <Reveal className="mt-12 text-center">
-        <a href={profile.github} target="_blank" rel="noopener noreferrer" className="btn-ghost group">
-          <Github className="h-4 w-4" />
+      <Reveal className="mt-10">
+        <a href={profile.github} target="_blank" rel="noopener noreferrer" className="btn-ghost">
+          <Github aria-hidden className="h-4 w-4" />
           More on GitHub
-          <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          <ArrowUpRight aria-hidden className="h-4 w-4" />
         </a>
       </Reveal>
     </div>
