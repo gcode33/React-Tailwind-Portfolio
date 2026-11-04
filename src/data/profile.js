@@ -145,3 +145,11 @@ export const personal = {
   ],
   rewatching: "Hunter x Hunter. Feitan first, then Gon, Killua, Kurapika and Leorio.",
 };
+
+// Background music for the dock. The file is only requested once a visitor turns sound on.
+export const soundtrack = {
+  shortTitle: "Jazz Funk Groove",
+  artist: "ArtManzh",
+  src: "/audio/jazz-funk-groove.mp3",
+  href: "https://pixabay.com/music/smooth-jazz-jazz-funk-groove-instrumental-222618/",
+};

@@ -1,6 +1,7 @@
 import { useLayoutEffect, useRef, useState } from "react";
 import { useInView, useReducedMotion } from "motion/react";
 import { decodeFrame } from "@/lib/decode";
+import { sound } from "@/lib/sound";
 
 const DURATION_MS = 800;
 const FRAME_MS = 50;
@@ -20,6 +21,7 @@ export const DecodeText = ({ text }) => {
     if (!running) return;
     const noise = noiseRef.current;
     noise.textContent = decodeFrame(text, 0);
+    sound.effect("tick");
 
     let start;
     let last = -Infinity;

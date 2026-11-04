@@ -2,6 +2,7 @@ import { GraduationCap } from "lucide-react";
 import { DecodeText } from "./DecodeText";
 import { Reveal } from "./Reveal";
 import { Shirt } from "./Graphics";
+import { SongList } from "./SongList";
 import { education, personal } from "@/data/profile";
 
 export const AboutSection = () => (
@@ -59,20 +60,7 @@ export const AboutSection = () => (
 
         <div className="border border-border p-4">
           <p className="font-semibold">On rotation</p>
-          <ul className="mt-1 flex flex-col text-[15px]">
-            {personal.songs.map((song) => (
-              <li key={song.href}>
-                <a
-                  href={song.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex min-h-11 items-center text-accent underline-offset-4 hover:underline"
-                >
-                  {song.title}, {song.artist}
-                </a>
-              </li>
-            ))}
-          </ul>
+          <SongList songs={personal.songs} />
         </div>
 
         <div className="border border-border p-4">

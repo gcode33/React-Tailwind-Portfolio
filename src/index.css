@@ -38,6 +38,8 @@
   html {
     @apply scroll-smooth;
     scroll-padding-top: 5rem;
+    /* Keeps keyboard focus from landing behind the dock. */
+    scroll-padding-bottom: 5rem;
   }
 
   body {
@@ -99,6 +101,26 @@
 
 @utility btn-ghost {
   @apply btn border border-foreground text-foreground hover:bg-foreground hover:text-background;
+}
+
+/* Dock equalizer. Only transform changes, so a playing dock never triggers layout or paint. */
+.eq-bar {
+  transform: scaleY(0.3);
+  transform-origin: bottom;
+}
+
+.eq-bar[data-playing="true"] {
+  animation: eq 700ms ease-in-out infinite alternate;
+  animation-delay: var(--eq-delay);
+}
+
+@keyframes eq {
+  from {
+    transform: scaleY(0.25);
+  }
+  to {
+    transform: scaleY(1);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

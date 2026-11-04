@@ -3,6 +3,7 @@ import { useMotionValueEvent, useReducedMotion, useScroll } from "motion/react";
 import { Check } from "lucide-react";
 import { SectionHeading } from "./SectionHeading";
 import { litStages } from "@/lib/pipeline";
+import { sound } from "@/lib/sound";
 import { shipStages } from "@/data/profile";
 
 // The stages light up in turn as you scroll, like a CI run passing. A passed stage stays
@@ -11,10 +12,15 @@ export const ShipSection = () => {
   const listRef = useRef(null);
   const reduced = useReducedMotion();
   const [reached, setReached] = useState(0);
+  const reachedRef = useRef(0);
   const { scrollYProgress } = useScroll({ target: listRef, offset: ["start 90%", "end 70%"] });
 
   useMotionValueEvent(scrollYProgress, "change", (progress) => {
-    setReached((previous) => Math.max(previous, litStages(progress, shipStages.length)));
+    const stages = litStages(progress, shipStages.length);
+    if (stages <= reachedRef.current) return;
+    reachedRef.current = stages;
+    setReached(stages);
+    sound.effect("tick");
   });
 
   const lit = reduced ? shipStages.length : reached;
