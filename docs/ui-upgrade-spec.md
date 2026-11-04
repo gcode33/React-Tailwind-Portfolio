@@ -127,28 +127,15 @@ Visitors press play and hear previews through Apple. Signed-out visitors get 30-
 | L'amore dice Ciao (Main Titles) | Armando Trovajoli | [Link](https://music.apple.com/ca/album/lamore-dice-ciao-main-titles-2022-remastered/882321839?i=882321840) |
 | Sylvia | Arthur Verocai | [Link](https://music.apple.com/ca/album/sylvia/495578530?i=495578535) |
 | I Choose You | Chicago Gangsters | [Link](https://music.apple.com/ca/album/i-choose-you/1376664672?i=1376665099) |
-| To confirm | Earth, Wind & Fire | George named the band. Exact song still needed. |
+| Earth, Wind & Fire (from *Spirit*, 1976) | Earth, Wind & Fire | [Link](https://music.apple.com/ca/album/earth-wind-fire/523227111?i=523227120) |
 
-**Favourite Songs.** George wants to use this playlist. Claude can't read it from this Mac, and it wasn't confirmed that Apple lets this automatic playlist be shared. If Share gives a link, embed it. If not, make a regular public playlist from those songs, or embed the songs above one at a time.
+**Favourite Songs is dropped.** Claude can't read it from this Mac, and George said not to worry about it, so the site embeds these five songs one at a time.
 
 ### Background music (dock, licensed)
 
 Instrumental jazz funk and lounge in the spirit of George's picks, from Pixabay. Its summary says no attribution is needed but forbids distributing content as-is. So: stream only, no download link, and read the full terms before shipping.
 
-**Shortlist.** Listed on Pixabay on 2026-11-03. Nobody has listened to these yet, so George picks by ear.
-
-| Track | Artist | Length | Closest to |
-| --- | --- | --- | --- |
-| [Jazz Funk Groove Instrumental](https://pixabay.com/music/smooth-jazz-jazz-funk-groove-instrumental-222618/) (default) | ArtManzh | 4:48 | Breeze |
-| [Night Funk](https://pixabay.com/music/funk-night-funk-jazz-funk-instrumental-305443/) | NEST-BEATZOfficial | 4:00 | Breeze |
-| [Bossa Lounge Midnight Club](https://pixabay.com/music/bossa-nova-bossa-lounge-midnight-club-552781/) | alex-morgan | 2:28 | Sylvia |
-| [Bossa Lounge Rainy Night](https://pixabay.com/music/bossa-nova-bossa-lounge-rainy-night-552783/) | alex-morgan | 2:29 | L'amore dice Ciao |
-| [Somewhere In Miami 70s](https://pixabay.com/music/funk-somewhere-in-miami-70s-489141/) | BerryDeep | 2:08 | I Choose You |
-| [Groove & Glide](https://pixabay.com/music/funk-groove-amp-glide-327638/) | LozyGroove | 3:52 | Earth, Wind & Fire |
-
-The default is the longest and is tagged smooth jazz, funk and guitar, so a loop should be less noticeable. Lengths and tags are from the listing.
-
-**Fallback:** generate a short loop in code with Tone.js (MIT).
+**Chosen by George:** [Jazz Funk Groove Instrumental](https://pixabay.com/music/smooth-jazz-jazz-funk-groove-instrumental-222618/) by ArtManzh, 4:48, tagged smooth jazz, funk and guitar.
 
 ### Sound rules
 
@@ -189,13 +176,25 @@ Each phase is one PR, with a Vercel preview to review before the next.
 
 | Phase | Work | Done when |
 | --- | --- | --- |
-| 0 | Fix the production domain | The public URL loads and serves the current résumé |
+| 0 | Assign a production domain in Vercel (see below) | A signed-out visitor can load the site and the current résumé |
 | 1 | Tokens, fonts, Motion, shared reduced-motion setup, new section layouts including How I ship and the system diagram, dark only | All sections match the boards with no special effects, tests pass at phone and desktop width |
 | 2 | Hero stagger, decode headings, bracket button, through-ball transition | Works with mouse, keyboard and reduced motion |
 | 3 | Pitch lines, ball on timeline, pipeline lights, track rows, net ripple | Smooth at 60fps on a mid-range phone profile |
 | 4 | Dock, audio engine, filter, effects, Apple Music embed | Sound stays off until opted in, and works on iOS Safari |
 | 5 | Inspect mode, build strip, HxH touches | Keyboard usable, build values are real |
 | 6 | Lighthouse, screen reader pass, device checks, track licence recheck | Section 8 budgets all met |
+
+### Phase 0 findings (2026-11-03)
+
+Latest production deployment `f8ae95e` succeeded, but signed-out visitors can't reach it:
+
+| Address | Result for a signed-out visitor |
+| --- | --- |
+| `react-tailwind-portfolio-lyart.vercel.app` | 404 `DEPLOYMENT_NOT_FOUND`: not attached to any deployment |
+| `react-tailwind-portfolio-george-fotabongs-projects.vercel.app` | 302 to Vercel login: generated URL behind Deployment Protection |
+| `react-tailwind-portfolio-6jt8d3u4p-...vercel.app` | 302 to Vercel login: same reason |
+
+Vercel's Standard Protection covers every address except production domains, so the fix is to attach a domain to Production, and protection stays on for previews. After that, update the repo's homepage link.
 
 ## 10. Decisions
 
@@ -205,13 +204,12 @@ Each phase is one PR, with a Vercel preview to review before the next.
 | Theme | Dark only |
 | Club, position, number | Chelsea, striker, 3 (years of experience) |
 | Character | Feitan |
+| Background track | Jazz Funk Groove Instrumental |
+| George's songs | Five songs embedded individually, no Favourite Songs playlist |
 
 ### Still open
 
-1. Which Earth, Wind & Fire song?
-2. Does Favourite Songs give a share link in Apple Music?
-3. Which background track, after listening to the shortlist?
-4. Fix the production domain (Phase 0).
+1. Assign the production domain (Phase 0).
 
 ## 11. Sources
 
