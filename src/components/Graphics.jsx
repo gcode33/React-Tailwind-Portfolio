@@ -21,22 +21,6 @@ export const Shirt = ({ number, className }) => (
   </svg>
 );
 
-export const PitchLines = () => (
-  <svg
-    aria-hidden="true"
-    viewBox="0 0 1440 760"
-    preserveAspectRatio="xMidYMid slice"
-    className="pointer-events-none absolute inset-0 h-full w-full"
-  >
-    <g fill="none" stroke="var(--color-foreground)" strokeOpacity="0.16" strokeWidth="2">
-      <line x1="720" y1="0" x2="720" y2="760" />
-      <circle cx="720" cy="380" r="210" />
-      <rect x="-40" y="130" width="250" height="500" />
-      <rect x="1230" y="130" width="250" height="500" />
-    </g>
-  </svg>
-);
-
 const TICK = "absolute h-[7px] w-[7px] border-foreground transition-transform duration-200 ease-out";
 
 // Corner ticks that frame the main button on the page, and open out on hover or keyboard focus.

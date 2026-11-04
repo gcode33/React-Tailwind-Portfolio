@@ -1,6 +1,7 @@
+import { useRef } from "react";
 import { Reveal } from "./Reveal";
 import { SectionHeading } from "./SectionHeading";
-import { Ball } from "./Graphics";
+import { TimelineTrack } from "./TimelineTrack";
 import { experience } from "@/data/profile";
 
 // Real fixes read like a code diff. The +/- and hidden labels carry the meaning, not just colour.
@@ -29,7 +30,10 @@ const marker = (i) => {
   return "";
 };
 
-export const ExperienceSection = () => (
+export const ExperienceSection = () => {
+  const timelineRef = useRef(null);
+
+  return (
   <section id="experience" className="border-y border-border bg-subtle py-20 md:py-24">
     <div className="container">
       <SectionHeading
@@ -37,11 +41,10 @@ export const ExperienceSection = () => (
         description="Backend services, front ends and the pipelines that keep them honest."
       />
 
-      <ol className="flex flex-col gap-9 border-l-2 border-foreground pl-7 md:pl-10">
+      <ol ref={timelineRef} className="relative ml-0.5 flex flex-col gap-9 pl-7 md:pl-10">
+        <TimelineTrack targetRef={timelineRef} />
         {experience.map((job, i) => (
           <Reveal as="li" key={`${job.company}-${job.period}`} delay={i * 60} className="relative flex flex-col gap-3">
-            {i === 0 && <Ball className="absolute top-0.5 -left-[41px] h-6 w-6 md:-left-[53px]" />}
-
             <div>
               <p className={`mono-label ${i === 0 ? "text-accent" : "text-muted"}`}>
                 {job.period.toUpperCase()}
@@ -75,4 +78,5 @@ export const ExperienceSection = () => (
       </ol>
     </div>
   </section>
-);
+  );
+};

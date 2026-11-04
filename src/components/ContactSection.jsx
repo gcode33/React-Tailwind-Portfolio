@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
+import { useInView } from "motion/react";
 import { Check, Copy, Download, Github, Linkedin, Mail } from "lucide-react";
 import { DecodeText } from "./DecodeText";
+import { GoalNet } from "./GoalNet";
 import { Reveal } from "./Reveal";
 import { experience, profile } from "@/data/profile";
 
@@ -11,6 +13,14 @@ const linkClass = "inline-flex min-h-11 items-center gap-2 break-all text-accent
 export const ContactSection = () => {
   const [copied, setCopied] = useState(false);
   const resetTimer = useRef(null);
+  const sectionRef = useRef(null);
+  const netRef = useRef(null);
+  const seen = useInView(sectionRef, { once: true, amount: 0.5 });
+
+  // One shot the first time the section comes into view, so everyone sees the net move.
+  useEffect(() => {
+    if (seen) netRef.current?.shoot();
+  }, [seen]);
 
   useEffect(() => () => clearTimeout(resetTimer.current), []);
 
@@ -26,15 +36,20 @@ export const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="border-t border-border py-20 md:py-24">
-      <div className="container grid items-center gap-12 lg:grid-cols-[1.3fr_1fr] lg:gap-14">
+    <section ref={sectionRef} id="contact" className="relative overflow-hidden border-t border-border py-20 md:py-24">
+      <GoalNet ref={netRef} />
+      <div className="container relative grid items-center gap-12 lg:grid-cols-[1.3fr_1fr] lg:gap-14">
         <Reveal className="flex flex-col gap-4">
           <h2 className="display text-[clamp(3.5rem,8vw,6.5rem)] leading-none">
             <DecodeText text="Put it in the net." />
           </h2>
           <p className="text-soft">Hiring, or want to talk code, Chelsea or 70s jazz funk? Send me a note.</p>
           <div className="flex flex-wrap gap-3">
-            <a href={`mailto:${profile.email}`} className="btn-primary">
+            <a
+              href={`mailto:${profile.email}`}
+              onClick={(event) => netRef.current?.shoot(event.currentTarget)}
+              className="btn-primary"
+            >
               <Mail aria-hidden className="h-4 w-4" />
               Email me
             </a>
