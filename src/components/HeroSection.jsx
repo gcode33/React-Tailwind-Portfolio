@@ -1,6 +1,8 @@
 import { Download, Github, Linkedin, Mail, MapPin } from "lucide-react";
 import { experience, personal, profile, projects } from "@/data/profile";
 import { Bracketed, PitchLines } from "./Graphics";
+import { HeroName } from "./HeroName";
+import { Reveal } from "./Reveal";
 
 const socials = [
   { label: "GitHub", href: profile.github, icon: Github },
@@ -21,22 +23,18 @@ export const HeroSection = () => (
     <PitchLines />
 
     <div className="container relative flex flex-col gap-6 pt-32 pb-16 md:pt-40 md:pb-20">
-      <p className="mono-label text-accent">
+      <Reveal as="p" className="mono-label text-accent">
         NO. {personal.number} · LIVE AT {profile.currently.toUpperCase()} · {profile.location.toUpperCase()}
-      </p>
+      </Reveal>
 
-      <h1 className="display text-[clamp(4rem,12vw,11rem)] leading-[0.98] tracking-[0.01em]">
-        George
-        <br />
-        Fotabong Jr.
-      </h1>
+      <HeroName />
 
-      <p className="max-w-[39rem] text-xl leading-normal text-soft">
+      <Reveal as="p" delay={350} className="max-w-[39rem] text-xl leading-normal text-soft">
         {profile.role}. I build reliable backend services and clean, accessible front ends, with
         production experience across Node/TypeScript, .NET and Python microservices.
-      </p>
+      </Reveal>
 
-      <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
+      <Reveal delay={450} className="flex flex-wrap items-center gap-x-5 gap-y-3">
         <Bracketed>
           <a href="#projects" className="btn-primary mono-label">
             KICK OFF · VIEW MY WORK
@@ -46,9 +44,9 @@ export const HeroSection = () => (
           <Download aria-hidden className="h-4 w-4" />
           Download résumé
         </a>
-      </div>
+      </Reveal>
 
-      <div className="flex flex-wrap items-center gap-5 text-muted">
+      <Reveal delay={550} className="flex flex-wrap items-center gap-5 text-muted">
         {socials.map((social) => {
           const { label, href, icon: Icon } = social;
           return (
@@ -68,16 +66,16 @@ export const HeroSection = () => (
           <MapPin aria-hidden className="h-4 w-4" />
           {profile.location}
         </span>
-      </div>
+      </Reveal>
 
-      <dl className="mt-6 grid grid-cols-3 border-y border-border">
+      <Reveal as="dl" delay={650} className="mt-6 grid grid-cols-3 border-y border-border">
         {stats.map((stat, i) => (
           <div key={stat.label} className={i === 0 ? "py-3.5 pr-4" : "border-l border-border px-4 py-3.5"}>
             <dd className="display text-4xl leading-tight">{stat.value}</dd>
             <dt className="text-[13px] text-muted">{stat.label}</dt>
           </div>
         ))}
-      </dl>
+      </Reveal>
     </div>
   </section>
 );

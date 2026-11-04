@@ -1,4 +1,5 @@
 import { GraduationCap } from "lucide-react";
+import { DecodeText } from "./DecodeText";
 import { Reveal } from "./Reveal";
 import { Shirt } from "./Graphics";
 import { education, personal } from "@/data/profile";
@@ -8,7 +9,7 @@ export const AboutSection = () => (
     <div className="container grid gap-12 lg:grid-cols-[1.3fr_1fr] lg:gap-14">
       <Reveal className="flex flex-col gap-4 text-soft">
         <h2 className="display text-5xl leading-[1.05] text-foreground md:text-[56px]">
-          Building reliable software, end to end.
+          <DecodeText text="Building reliable software, end to end." />
         </h2>
         <p>
           I'm a software developer based in Toronto, Ontario, with a BSc in Computer Science. I
