@@ -3,6 +3,7 @@ import { useInView } from "motion/react";
 import { Check, Copy, Download, Github, Linkedin, Mail } from "lucide-react";
 import { DecodeText } from "./DecodeText";
 import { GoalNet } from "./GoalNet";
+import { InspectNote } from "./InspectNote";
 import { Reveal } from "./Reveal";
 import { experience, profile } from "@/data/profile";
 
@@ -44,6 +45,7 @@ export const ContactSection = () => {
             <DecodeText text="Put it in the net." />
           </h2>
           <p className="text-soft">Hiring, or want to talk code, Chelsea or 70s jazz funk? Send me a note.</p>
+          <InspectNote id="contact" />
           <div className="flex flex-wrap gap-3">
             <a
               href={`mailto:${profile.email}`}

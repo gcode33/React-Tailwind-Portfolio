@@ -1,5 +1,6 @@
 import { GraduationCap } from "lucide-react";
 import { DecodeText } from "./DecodeText";
+import { InspectNote } from "./InspectNote";
 import { Reveal } from "./Reveal";
 import { Shirt } from "./Graphics";
 import { SongList } from "./SongList";
@@ -61,6 +62,7 @@ export const AboutSection = () => (
         <div className="border border-border p-4">
           <p className="font-semibold">On rotation</p>
           <SongList songs={personal.songs} />
+          <InspectNote id="about" className="mt-2" />
         </div>
 
         <div className="border border-border p-4">

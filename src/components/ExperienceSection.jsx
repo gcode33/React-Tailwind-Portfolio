@@ -37,6 +37,7 @@ export const ExperienceSection = () => {
   <section id="experience" className="border-y border-border bg-subtle py-20 md:py-24">
     <div className="container">
       <SectionHeading
+          note="experience"
         title="The season so far"
         description="Backend services, front ends and the pipelines that keep them honest."
       />

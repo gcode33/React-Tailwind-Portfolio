@@ -3,6 +3,7 @@ import { experience, personal, profile, projects } from "@/data/profile";
 import { Bracketed } from "./Graphics";
 import { PitchLines } from "./PitchLines";
 import { HeroName } from "./HeroName";
+import { InspectNote } from "./InspectNote";
 import { Reveal } from "./Reveal";
 
 const socials = [
@@ -29,6 +30,7 @@ export const HeroSection = () => (
       </Reveal>
 
       <HeroName />
+      <InspectNote id="hero" />
 
       <Reveal as="p" delay={350} className="max-w-[39rem] text-xl leading-normal text-soft">
         {profile.role}. I build reliable backend services and clean, accessible front ends, with

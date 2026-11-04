@@ -29,6 +29,7 @@ export const ShipSection = () => {
     <section id="process" className="py-20 md:py-24">
       <div className="container">
         <SectionHeading
+          note="process"
           title="How I ship"
           description="The workflow I've built up across roles: spec first, test first, with Claude Code throughout and its output verified by running it."
         />

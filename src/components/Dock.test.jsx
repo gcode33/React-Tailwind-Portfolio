@@ -8,6 +8,6 @@ describe("Dock", () => {
   it("starts off, with a real toggle and a status readers can follow", () => {
     render(<Dock />);
     expect(screen.getByRole("button", { name: "Sound" }).getAttribute("aria-pressed")).toBe("false");
-    expect(screen.getByRole("status").textContent).toBe("Off until you choose");
+    expect(screen.getAllByRole("status").map((status) => status.textContent)).toContain("Off until you choose");
   });
 });

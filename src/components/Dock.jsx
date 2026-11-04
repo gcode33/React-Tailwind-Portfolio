@@ -1,4 +1,5 @@
-import { Volume2, VolumeX } from "lucide-react";
+import { Code2, Volume2, VolumeX } from "lucide-react";
+import { toggleInspect, useInspect } from "@/lib/inspect";
 import { sound, useSound } from "@/lib/sound";
 
 const message = ({ status, resumable }) => {
@@ -9,6 +10,7 @@ const message = ({ status, resumable }) => {
 
 export const Dock = () => {
   const state = useSound();
+  const inspecting = useInspect();
   const on = state.status === "on";
   const Icon = on ? Volume2 : VolumeX;
 
@@ -28,8 +30,23 @@ export const Dock = () => {
           Sound
         </button>
 
-        <p role="status" className="min-w-0 font-mono text-xs leading-snug text-[#3b4e43]">
+        <button
+          type="button"
+          aria-pressed={inspecting}
+          onClick={toggleInspect}
+          className={`flex min-h-11 shrink-0 cursor-pointer items-center gap-2 border border-background px-3.5 font-mono text-[13px] transition-colors focus-visible:outline-chelsea ${
+            inspecting ? "bg-background text-foreground" : "hover:bg-background/10"
+          }`}
+        >
+          <Code2 aria-hidden="true" className={`h-4 w-4 ${inspecting ? "text-mint" : ""}`} />
+          Inspect
+        </button>
+
+        <p role="status" className="min-w-0 font-mono text-xs leading-snug text-[#3b4e43] max-sm:sr-only">
           {message(state)}
+        </p>
+        <p role="status" className="sr-only">
+          {inspecting ? "Inspect is on. Build notes are showing in each section." : ""}
         </p>
       </div>
     </aside>

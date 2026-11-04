@@ -24,6 +24,9 @@
   /* Engineering */
   --color-mint: #8fe3cf;
   --color-removed: #ffb4a6;
+
+  /* Rising Sun. One Feitan detail only, the last Inspect note. */
+  --color-ember: #ff8a5c;
 }
 
 @layer base {
