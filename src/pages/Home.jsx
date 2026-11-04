@@ -3,6 +3,7 @@ import { Navbar } from "@/components/Navbar";
 import { HeroSection } from "@/components/HeroSection";
 import { AboutSection } from "@/components/AboutSection";
 import { ExperienceSection } from "@/components/ExperienceSection";
+import { ShipSection } from "@/components/ShipSection";
 import { ProjectSection } from "@/components/ProjectSection";
 import { SkillsSection } from "@/components/SkillsSection";
 import { ContactSection } from "@/components/ContactSection";
@@ -20,7 +21,7 @@ export const Home = () => {
     <div className="min-h-screen overflow-x-clip">
       <a
         href="#main"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-md focus:bg-card focus:px-4 focus:py-2"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:bg-subtle focus:px-4 focus:py-2"
       >
         Skip to content
       </a>
@@ -29,6 +30,7 @@ export const Home = () => {
         <HeroSection />
         <AboutSection />
         <ExperienceSection />
+        <ShipSection />
         <ProjectSection />
         <SkillsSection />
         <ContactSection />

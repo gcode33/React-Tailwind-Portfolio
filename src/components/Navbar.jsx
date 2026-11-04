@@ -1,12 +1,12 @@
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { ThemeToggle } from "./ThemeToggle";
 import { profile } from "@/data/profile";
 
 const navItems = [
   { name: "About", href: "#about" },
   { name: "Experience", href: "#experience" },
+  { name: "How I ship", href: "#process" },
   { name: "Projects", href: "#projects" },
   { name: "Skills", href: "#skills" },
   { name: "Contact", href: "#contact" },
@@ -79,12 +79,12 @@ export const Navbar = () => {
         className={cn(
           "fixed inset-x-0 top-0 z-40 transition-all duration-300",
           isScrolled
-            ? "border-b border-border/70 bg-background/75 py-3 backdrop-blur-lg"
+            ? "border-b border-border bg-background/90 py-3 backdrop-blur-lg"
             : "border-b border-transparent py-5"
         )}
       >
         <nav aria-label="Main" className="container flex items-center justify-between">
-          <a href="#hero" className="font-mono text-sm font-medium tracking-tight">
+          <a href="#hero" className="font-mono text-sm font-medium">
             <span className="text-accent">~/</span>
             {profile.name.split(" ").slice(0, 2).join("-").toLowerCase()}
           </a>
@@ -97,7 +97,7 @@ export const Navbar = () => {
                     href={item.href}
                     aria-current={active === item.href ? "location" : undefined}
                     className={cn(
-                      "relative rounded-md px-3 py-2 text-sm transition-colors duration-200 hover:text-foreground",
+                      "relative px-3 py-2 text-sm transition-colors duration-200 hover:text-foreground",
                       active === item.href ? "text-foreground" : "text-muted"
                     )}
                   >
@@ -117,16 +117,14 @@ export const Navbar = () => {
               href={profile.resume}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-ghost ml-2 hidden px-4 py-2 md:inline-flex"
+              className="btn-ghost ml-2 hidden min-h-0 px-4 py-2 md:inline-flex"
             >
               Résumé
             </a>
 
-            <ThemeToggle />
-
             <button
               ref={menuButtonRef}
-              className="rounded-md p-2 text-foreground md:hidden"
+              className="flex h-11 w-11 items-center justify-center text-foreground md:hidden"
               onClick={() => setIsMenuOpen((open) => !open)}
               aria-label={isMenuOpen ? "Close menu" : "Open menu"}
               aria-expanded={isMenuOpen}
@@ -162,7 +160,7 @@ export const Navbar = () => {
                 <a
                   href={item.href}
                   onClick={() => setIsMenuOpen(false)}
-                  className="block border-b border-border py-4 text-2xl font-medium tracking-tight"
+                  className="display block border-b border-border py-4 text-3xl"
                 >
                   {item.name}
                 </a>
