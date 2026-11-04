@@ -128,22 +128,14 @@ export const education = {
   period: "2020 — 2025",
 };
 
-export const songs = [
-    { title: "Breeze", artist: "Jiro Inagaki and His Soul Media", href: "https://music.apple.com/ca/album/breeze/1508946500?i=1508946503" },
-    { title: "L'amore dice Ciao", artist: "Armando Trovajoli", href: "https://music.apple.com/ca/album/lamore-dice-ciao-main-titles-2022-remastered/882321839?i=882321840" },
-    { title: "Sylvia", artist: "Arthur Verocai", href: "https://music.apple.com/ca/album/sylvia/495578530?i=495578535" },
-    { title: "I Choose You", artist: "Chicago Gangsters", href: "https://music.apple.com/ca/album/i-choose-you/1376664672?i=1376665099" },
-    { title: "Earth, Wind & Fire", artist: "Earth, Wind & Fire", href: "https://music.apple.com/ca/album/earth-wind-fire/523227111?i=523227120" },
-  ];
-
 // Inspect mode: how each section is built. Keep these true when the code changes.
 export const inspectNotes = {
-  hero: "this headline is real text, split into letters with Motion. No canvas, so screen readers and résumé bots can read it.",
-  about: "Apple's player only loads once you pick a song, so nothing is requested from Apple until then.",
-  experience: "this line is drawn like a commit graph, and its head follows your scroll with Motion's useScroll. Newest role stays first, the way recruiters read a résumé.",
+  hero: "this headline is real text over a canvas that only redraws when something changes, so screen readers and résumé bots can read it.",
+  about: "each word's opacity is tied to scroll position, while the text stays in normal order for screen readers.",
+  experience: "the marker's position and spin come from Motion's useScroll. Newest role stays first, the way recruiters read a résumé.",
   process: "each stage lights up in turn as you scroll, like a CI run passing. With reduced motion on, all six are simply lit.",
   projects: "each row is one real link, so keyboard focus gets the same shift and underline as a mouse. The scroll animations only change transform and opacity, so they never force a layout.",
   skills: 'no skill percentages here on purpose. A bar reading "React 90%" claims something I can\'t measure.',
-  booking: "the calendar only loads once you ask for it, so nothing is requested from the booking service until then.",
-  contact: "Copy email uses the Clipboard API, and opens your mail app instead if the browser blocks it.",
+  booking: "the calendar is built here with no third-party script. Times are converted using the browser's time zone data, so they stay correct across daylight saving.",
+  contact: "the net is a canvas that only draws while the shot is moving. Copy email uses the Clipboard API, with your mail app as the fallback.",
 };

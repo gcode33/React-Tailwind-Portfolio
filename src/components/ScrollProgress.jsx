@@ -13,7 +13,7 @@ export const ScrollProgress = () => {
     <Bar
       aria-hidden="true"
       data-scroll-progress
-      className="pointer-events-none fixed inset-x-0 top-0 z-[45] h-0.5 origin-left bg-mint print:hidden"
+      className="pointer-events-none fixed inset-x-0 top-0 z-[45] h-0.5 origin-left bg-signal print:hidden"
       style={{ scaleX }}
     />
   );

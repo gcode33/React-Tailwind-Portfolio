@@ -7,7 +7,7 @@ export const InspectNote = ({ id, className = "" }) => {
   const inspecting = useInspect();
   if (!inspecting) return null;
   return (
-    <p data-inspect-note className={`font-mono text-[13px] leading-relaxed text-mint ${className}`}>
+    <p data-inspect-note className={`font-mono text-[13px] leading-relaxed text-signal ${className}`}>
       // inspect: {inspectNotes[id]}
     </p>
   );

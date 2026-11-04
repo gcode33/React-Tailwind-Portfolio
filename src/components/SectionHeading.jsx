@@ -21,7 +21,7 @@ export const SectionHeading = ({ title, description, note }) => {
         {description && <p className="mt-4 text-soft">{description}</p>}
         {note && <InspectNote id={note} className="mt-3" />}
       </ScrubIn>
-      <Rule aria-hidden="true" data-heading-rule className="mt-5 h-px origin-left bg-mint" style={{ scaleX }} />
+      <Rule aria-hidden="true" data-heading-rule className="mt-5 h-px origin-left bg-signal" style={{ scaleX }} />
     </div>
   );
 };

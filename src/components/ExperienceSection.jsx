@@ -15,7 +15,7 @@ const FixesDiff = ({ fixes }) => (
           <span aria-hidden="true">- </span>
           {fix.before}
         </p>
-        <p className="text-mint">
+        <p className="text-added">
           <span className="sr-only">After: </span>
           <span aria-hidden="true">+ </span>
           {fix.after}
@@ -57,7 +57,7 @@ export const ExperienceSection = () => {
   const timelineRef = useRef(null);
 
   return (
-  <section id="experience" className="border-y border-border bg-subtle py-20 md:py-24">
+  <section id="experience" className="bg-subtle py-20 md:py-24">
     <div className="container">
       <SectionHeading
           note="experience"

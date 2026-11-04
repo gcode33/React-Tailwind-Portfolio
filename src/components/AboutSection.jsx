@@ -2,8 +2,15 @@ import { GraduationCap } from "lucide-react";
 import { InspectNote } from "./InspectNote";
 import { Reveal } from "./Reveal";
 import { ScrollWords } from "./ScrollWords";
-import { SongList } from "./SongList";
-import { education, songs } from "@/data/profile";
+import { education, experience, projects } from "@/data/profile";
+
+const firstYear = Math.min(...experience.map((job) => new Date(job.start).getUTCFullYear()));
+
+const stats = [
+  { value: firstYear, label: "Professional experience since" },
+  { value: experience.length, label: "Software development roles" },
+  { value: projects.length, label: "Featured projects" },
+];
 
 export const AboutSection = () => (
   <section id="about" className="py-20 md:py-24">
@@ -49,12 +56,16 @@ export const AboutSection = () => (
           </div>
         </div>
 
-        <h3 className="mono-label mt-4 text-accent">OFF THE CLOCK</h3>
-        <div className="border border-border p-4">
-          <p className="font-semibold">On rotation</p>
-          <SongList songs={songs} />
-          <InspectNote id="about" className="mt-2" />
-        </div>
+        <h3 className="mono-label mt-4 text-accent">AT A GLANCE</h3>
+        <dl className="border border-border">
+          {stats.map((stat, i) => (
+            <div key={stat.label} className={`flex items-baseline gap-4 p-4 ${i ? "border-t border-border" : ""}`}>
+              <dt className="order-2 text-sm text-muted">{stat.label}</dt>
+              <dd className="display order-1 min-w-20 text-4xl">{stat.value}</dd>
+            </div>
+          ))}
+        </dl>
+        <InspectNote id="about" className="mt-2" />
       </Reveal>
     </div>
   </section>

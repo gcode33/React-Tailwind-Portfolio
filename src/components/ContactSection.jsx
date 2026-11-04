@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
+import { useInView } from "motion/react";
 import { CalendarDays, Check, Copy, Download, Github, Linkedin, Mail } from "lucide-react";
 import { DecodeText } from "./DecodeText";
+import { GoalNet } from "./GoalNet";
 import { InspectNote } from "./InspectNote";
 import { ScrubIn } from "./ScrubIn";
 import { experience, profile } from "@/data/profile";
@@ -12,6 +14,15 @@ const linkClass = "inline-flex min-h-11 items-center gap-2 break-all text-accent
 export const ContactSection = () => {
   const [copied, setCopied] = useState(false);
   const resetTimer = useRef(null);
+  const sectionRef = useRef(null);
+  const netRef = useRef(null);
+  const seen = useInView(sectionRef, { once: true, amount: 0.5 });
+
+  // The pass from the last section finishes here, the first time it comes into view.
+  useEffect(() => {
+    if (seen) netRef.current?.shoot();
+  }, [seen]);
+
   useEffect(() => () => clearTimeout(resetTimer.current), []);
 
   const copyEmail = async () => {
@@ -26,7 +37,8 @@ export const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="border-t border-border py-20 md:py-24">
+    <section ref={sectionRef} id="contact" className="relative overflow-hidden py-20 md:py-24">
+      <GoalNet ref={netRef} />
       <div className="container relative grid items-center gap-12 lg:grid-cols-[1.3fr_1fr] lg:gap-14">
         <ScrubIn y={48} className="flex flex-col gap-4">
           <h2 className="display text-[clamp(3.5rem,8vw,6.5rem)] leading-none">
@@ -37,6 +49,7 @@ export const ContactSection = () => {
           <div className="flex flex-wrap gap-3">
             <a
               href={`mailto:${profile.email}`}
+              onClick={(event) => netRef.current?.shoot(event.currentTarget)}
               className="btn-primary"
             >
               <Mail aria-hidden className="h-4 w-4" />
@@ -46,12 +59,10 @@ export const ContactSection = () => {
               {copied ? <Check aria-hidden className="h-4 w-4" /> : <Copy aria-hidden className="h-4 w-4" />}
               <span aria-live="polite">{copied ? "Email copied" : "Copy email"}</span>
             </button>
-            {profile.bookingUrl && (
-              <a href="#book" className="btn-ghost">
-                <CalendarDays aria-hidden className="h-4 w-4" />
-                Book a time
-              </a>
-            )}
+            <a href="#book" className="btn-ghost">
+              <CalendarDays aria-hidden className="h-4 w-4" />
+              Book a time
+            </a>
           </div>
         </ScrubIn>
 

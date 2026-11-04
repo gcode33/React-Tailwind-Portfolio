@@ -10,6 +10,7 @@ const navItems = [
   { name: "Projects", href: "#projects" },
   { name: "Skills", href: "#skills" },
   { name: "Contact", href: "#contact" },
+  { name: "Book a call", href: "#book" },
 ];
 
 export const Navbar = () => {
@@ -52,7 +53,7 @@ export const Navbar = () => {
   useEffect(() => {
     if (!isMenuOpen) return;
 
-    const desktop = window.matchMedia("(min-width: 768px)");
+    const desktop = window.matchMedia("(min-width: 1024px)");
     const close = () => setIsMenuOpen(false);
     const handleKey = (event) => {
       if (event.key === "Escape") {
@@ -90,7 +91,7 @@ export const Navbar = () => {
           </a>
 
           <div className="flex items-center gap-2">
-            <ul className="hidden items-center gap-1 md:flex">
+            <ul className="hidden items-center gap-1 lg:flex">
               {navItems.map((item) => (
                 <li key={item.href}>
                   <a
@@ -117,14 +118,14 @@ export const Navbar = () => {
               href={profile.resume}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-ghost ml-2 hidden px-4 py-2 md:inline-flex"
+              className="btn-ghost ml-2 hidden px-4 py-2 lg:inline-flex"
             >
               Résumé
             </a>
 
             <button
               ref={menuButtonRef}
-              className="flex h-11 w-11 items-center justify-center text-foreground md:hidden"
+              className="flex h-11 w-11 items-center justify-center text-foreground lg:hidden"
               onClick={() => setIsMenuOpen((open) => !open)}
               aria-label={isMenuOpen ? "Close menu" : "Open menu"}
               aria-expanded={isMenuOpen}
@@ -142,7 +143,7 @@ export const Navbar = () => {
         id="mobile-menu"
         inert={!isMenuOpen}
         className={cn(
-          "fixed inset-0 z-30 bg-background/95 pt-20 backdrop-blur-lg transition-opacity duration-300 md:hidden",
+          "fixed inset-0 z-30 bg-background/95 pt-20 backdrop-blur-lg transition-opacity duration-300 lg:hidden",
           isMenuOpen ? "opacity-100" : "pointer-events-none opacity-0"
         )}
       >

@@ -1,11 +1,12 @@
 import { m, useReducedMotion } from "motion/react";
+import { introDelayS } from "@/lib/intro";
 
 const EASE_OUT = [0.22, 1, 0.36, 1];
 const LINES = ["George", "Fotabong Jr."];
 const FULL_NAME = LINES.join(" ");
 const Letter = m.span;
 
-const className = "display text-[clamp(3rem,16vw,11rem)] leading-[0.98] tracking-[0.01em]";
+const className = "display text-[clamp(2.25rem,11vw,8.5rem)] leading-[1.02] font-extralight tracking-[0.01em]";
 
 // The name arrives one letter at a time. Each word stays unbreakable, so letters
 // can't wrap onto separate lines on narrow screens.
@@ -38,7 +39,7 @@ export const HeroName = () => {
                     className="inline-block"
                     initial={{ opacity: 0, y: "0.3em" }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, ease: EASE_OUT, delay: 0.1 + index++ * 0.03 }}
+                    transition={{ duration: 0.6, ease: EASE_OUT, delay: introDelayS + 0.05 + index++ * 0.025 }}
                   >
                     {char}
                   </Letter>

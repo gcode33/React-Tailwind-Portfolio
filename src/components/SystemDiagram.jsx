@@ -30,7 +30,7 @@ const Part = ({ id, selected, onSelect, step, progress }) => {
       aria-pressed={isSelected}
       onClick={() => onSelect(id)}
       className={`flex min-h-[4.5rem] w-full min-w-0 cursor-pointer flex-col justify-center gap-0.5 border p-3 text-left transition-colors duration-200 ${
-        isSelected ? "border-mint bg-mint text-background" : "border-mint bg-subtle text-foreground hover:bg-border"
+        isSelected ? "border-signal bg-signal text-background" : "border-signal bg-subtle text-foreground hover:bg-border"
       }`}
     >
       <span className="font-mono text-sm font-medium">{part.group}</span>
@@ -46,7 +46,7 @@ const Connector = ({ progress, from, to }) => {
   return (
     <span aria-hidden="true" className="hidden items-center md:flex">
       <span className="relative h-0.5 w-full bg-border-strong">
-        <Fill data-connector className="absolute inset-0 origin-left bg-mint" style={{ scaleX }} />
+        <Fill data-connector className="absolute inset-0 origin-left bg-signal" style={{ scaleX }} />
       </span>
     </span>
   );
