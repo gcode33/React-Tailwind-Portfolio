@@ -8,6 +8,7 @@ import { ProjectSection } from "@/components/ProjectSection";
 import { SkillsSection } from "@/components/SkillsSection";
 import { ContactSection } from "@/components/ContactSection";
 import { Footer } from "@/components/Footer";
+import { SectionTransition } from "@/components/SectionTransition";
 
 export const Home = () => {
   // The browser tries to jump to a URL hash (e.g. /#projects) before React has rendered
@@ -25,6 +26,7 @@ export const Home = () => {
       >
         Skip to content
       </a>
+      <SectionTransition />
       <Navbar />
       <main id="main" tabIndex={-1} className="outline-none">
         <HeroSection />

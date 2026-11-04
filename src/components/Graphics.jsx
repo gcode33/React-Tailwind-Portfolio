@@ -1,9 +1,9 @@
 // Original drawings only: no club crests, kits or show artwork.
 
-export const Ball = ({ className }) => (
+export const Ball = ({ className, fill = "var(--color-foreground)", mark = "var(--color-background)" }) => (
   <svg aria-hidden="true" viewBox="0 0 24 24" className={className}>
-    <circle cx="12" cy="12" r="11" fill="var(--color-foreground)" />
-    <path d="M12 6l5 3.6-1.9 5.9H8.9L7 9.6z" fill="var(--color-background)" />
+    <circle cx="12" cy="12" r="11" fill={fill} />
+    <path d="M12 6l5 3.6-1.9 5.9H8.9L7 9.6z" fill={mark} />
   </svg>
 );
 
@@ -37,13 +37,15 @@ export const PitchLines = () => (
   </svg>
 );
 
-// Corner ticks that frame the main button on the page.
+const TICK = "absolute h-[7px] w-[7px] border-foreground transition-transform duration-200 ease-out";
+
+// Corner ticks that frame the main button on the page, and open out on hover or keyboard focus.
 export const Bracketed = ({ children }) => (
-  <span className="relative inline-block p-1.5">
-    <span aria-hidden="true" className="absolute top-0 left-0 h-[7px] w-[7px] border-t-2 border-l-2 border-foreground" />
-    <span aria-hidden="true" className="absolute top-0 right-0 h-[7px] w-[7px] border-t-2 border-r-2 border-foreground" />
-    <span aria-hidden="true" className="absolute bottom-0 left-0 h-[7px] w-[7px] border-b-2 border-l-2 border-foreground" />
-    <span aria-hidden="true" className="absolute right-0 bottom-0 h-[7px] w-[7px] border-r-2 border-b-2 border-foreground" />
+  <span className="group relative inline-block p-1.5">
+    <span aria-hidden="true" className={`${TICK} top-0 left-0 border-t-2 border-l-2 group-hover:-translate-x-1 group-hover:-translate-y-1 group-focus-within:-translate-x-1 group-focus-within:-translate-y-1`} />
+    <span aria-hidden="true" className={`${TICK} top-0 right-0 border-t-2 border-r-2 group-hover:translate-x-1 group-hover:-translate-y-1 group-focus-within:translate-x-1 group-focus-within:-translate-y-1`} />
+    <span aria-hidden="true" className={`${TICK} bottom-0 left-0 border-b-2 border-l-2 group-hover:-translate-x-1 group-hover:translate-y-1 group-focus-within:-translate-x-1 group-focus-within:translate-y-1`} />
+    <span aria-hidden="true" className={`${TICK} right-0 bottom-0 border-r-2 border-b-2 group-hover:translate-x-1 group-hover:translate-y-1 group-focus-within:translate-x-1 group-focus-within:translate-y-1`} />
     {children}
   </span>
 );

@@ -53,6 +53,11 @@
     outline-offset: 3px;
   }
 
+  /* Sections receive focus after a jump so Tab continues from there. No ring on the whole section. */
+  section[tabindex="-1"]:focus {
+    outline: none;
+  }
+
   h1,
   h2 {
     text-wrap: balance;
