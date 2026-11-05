@@ -1,0 +1,12 @@
+{
+  "performance": 99,
+  "accessibility": 100,
+  "bestPractices": 100,
+  "seo": 100,
+  "formFactor": "mobile",
+  "lighthouseVersion": "13.6.0",
+  "runs": 13,
+  "measuredOn": "2026-11-04",
+  "commit": "5c68e2225bcb15124e9068be063c425f3c5569f5",
+  "url": "https://george-fotabong.vercel.app/"
+}
