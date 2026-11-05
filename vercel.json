@@ -34,7 +34,7 @@
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; frame-src https://cal.com https://calendly.com https://calendar.google.com; base-uri 'none'; form-action 'none'; frame-ancestors 'none'"
+          "value": "default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; frame-src https://cal.com https://calendly.com https://calendar.google.com; base-uri 'none'; form-action 'none'; frame-ancestors 'none'"
         }
       ]
     },
