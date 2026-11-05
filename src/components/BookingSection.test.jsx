@@ -1,30 +1,22 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it } from "vitest";
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { BookingSection } from "./BookingSection";
 
 const href = "https://cal.com/george/30min";
 
-class StillObserver {
-  observe() {}
-  unobserve() {}
-  disconnect() {}
-}
-
-beforeEach(() => vi.stubGlobal("IntersectionObserver", StillObserver));
-afterEach(() => {
-  cleanup();
-  vi.unstubAllGlobals();
-});
+afterEach(cleanup);
 
 describe("BookingSection", () => {
-  it("shows nothing until a booking link is set, rather than a dead button", () => {
+  it("always has a calendar: the site's own picker when no service is linked", () => {
     const { container } = render(<BookingSection href={null} />);
-    expect(container.firstChild).toBeNull();
+    expect(screen.getByRole("heading", { level: 2 }).textContent).toContain("Let's get in touch");
+    expect(container.querySelector("[data-meeting-picker]")).not.toBeNull();
+    expect(container.querySelector("iframe")).toBeNull();
   });
 
-  it("requests nothing from the service until the visitor asks", () => {
+  it("with a service linked, requests nothing from it until the visitor asks", () => {
     const { container } = render(<BookingSection href={href} />);
-    expect(screen.getByRole("heading", { level: 2 }).textContent).toContain("Let's get in touch");
+    expect(container.querySelector("[data-meeting-picker]")).toBeNull();
     expect(container.querySelector("iframe")).toBeNull();
   });
 
@@ -33,11 +25,10 @@ describe("BookingSection", () => {
     expect(screen.getByRole("link", { name: /Open in a new tab/ }).getAttribute("href")).toBe(href);
   });
 
-  it("opens and closes the calendar", () => {
+  it("opens and closes the service's calendar", () => {
     render(<BookingSection href={href} />);
     const button = screen.getByRole("button", { name: "See available times" });
     fireEvent.click(button);
-
     expect(button.getAttribute("aria-expanded")).toBe("true");
     expect(screen.getByTitle(/Calendar to book/).getAttribute("src")).toBe(`${href}?theme=dark`);
 

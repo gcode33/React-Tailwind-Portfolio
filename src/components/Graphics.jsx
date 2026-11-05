@@ -1,3 +1,12 @@
+// Original drawings only.
+
+export const Ball = ({ className, fill = "var(--color-foreground)", mark = "var(--color-background)" }) => (
+  <svg aria-hidden="true" viewBox="0 0 24 24" className={className}>
+    <circle cx="12" cy="12" r="11" fill={fill} />
+    <path d="M12 6l5 3.6-1.9 5.9H8.9L7 9.6z" fill={mark} />
+  </svg>
+);
+
 const TICK = "absolute h-[7px] w-[7px] border-foreground transition-transform duration-200 ease-out";
 
 // Corner ticks that frame the main button on the page, and open out on hover or keyboard focus.

@@ -24,11 +24,14 @@ describe("SectionTransition", () => {
     expect(overlay.className).toContain("pointer-events-none");
   });
 
-  it("collapses the panel with transform only, so animating transform can reveal it", () => {
+  it("starts the slats out of sight with transform only, so animating transform can reveal them", () => {
     const { container } = render(<Page />);
-    const panel = container.querySelector("[data-section-transition] > div");
-    expect(panel.style.transform).toBe("scaleX(0)");
-    expect(panel.className).not.toContain("scale-x-0");
+    const slats = container.querySelectorAll("[data-wipe-slat]");
+    expect(slats).toHaveLength(6);
+    slats.forEach((slat) => {
+      expect(slat.style.transform).toBe("translateY(100%)");
+      expect(slat.className).not.toContain("translate-y");
+    });
   });
 
   it("lands on the section: scrolls, updates the URL and moves keyboard focus", async () => {

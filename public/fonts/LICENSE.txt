@@ -1,11 +1,11 @@
 These fonts are licensed under the SIL Open Font License, Version 1.1.
 Files come from Fontsource 5.3.0 (latin subsets).
 
-anton-latin-400.woff2: Copyright 2020 The Anton Project Authors
+outfit-latin-wght.woff2: Copyright 2021 The Outfit Project Authors
 instrument-sans-latin-wght.woff2: Copyright 2022 The Instrument Sans Project Authors
 jetbrains-mono-latin-wght.woff2: Copyright 2020 The JetBrains Mono Project Authors
 
-Licence text as shipped with the Anton package follows. The other two use the same licence.
+Licence text below is the standard one; the Anton copyright line in it is left from an earlier font. The other two use the same licence.
 
 Copyright 2020 The Anton Project Authors (https://github.com/googlefonts/AntonFont.git)
 

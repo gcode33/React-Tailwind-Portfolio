@@ -1,6 +1,7 @@
-import { useRef, useState } from "react";
-import { m, useMotionValueEvent, useReducedMotion, useTransform } from "motion/react";
+import { useEffect, useRef, useState } from "react";
+import { m, useMotionValue, useMotionValueEvent, useReducedMotion, useTransform } from "motion/react";
 import { Check } from "lucide-react";
+import { Ball } from "./Graphics";
 import { SectionHeading } from "./SectionHeading";
 import { litStages } from "@/lib/pipeline";
 import { sound } from "@/lib/sound";
@@ -9,6 +10,7 @@ import { shipStages } from "@/data/profile";
 
 const Rail = m.div;
 const StageItem = m.li;
+const RailBall = m.div;
 
 const Stage = ({ stage, index, passed, progress }) => {
   const count = shipStages.length;
@@ -19,12 +21,12 @@ const Stage = ({ stage, index, passed, progress }) => {
       data-passed={passed}
       style={{ y }}
       className={`flex min-w-0 flex-col gap-1.5 border-t-[3px] bg-subtle p-3.5 transition-colors duration-300 ${
-        passed ? "border-mint" : "border-border-strong"
+        passed ? "border-signal" : "border-border-strong"
       }`}
     >
       <span
         className={`flex items-center justify-between font-mono text-xs transition-colors duration-300 ${
-          passed ? "text-mint" : "text-muted"
+          passed ? "text-signal" : "text-muted"
         }`}
       >
         {String(index + 1).padStart(2, "0")}
@@ -58,6 +60,18 @@ export const ShipSection = () => {
 
   const lit = reduced ? shipStages.length : reached;
 
+  const railRef = useRef(null);
+  const railWidth = useMotionValue(0);
+  useEffect(() => {
+    const node = railRef.current;
+    if (!node) return;
+    const observer = new ResizeObserver(() => railWidth.set(node.getBoundingClientRect().width));
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [railWidth]);
+  const ballX = useTransform([progress, railWidth], ([p, w]) => p * Math.max(0, w - 20));
+  const ballSpin = useTransform([progress, railWidth], ([p, w]) => (p * w) / 3);
+
   return (
     <section id="process" className="py-20 md:py-24">
       <div className="container">
@@ -67,8 +81,11 @@ export const ShipSection = () => {
           description="The workflow I've built up across roles: spec first, test first, with Claude Code throughout and its output verified by running it."
         />
 
-        <div aria-hidden="true" className="mb-2 h-0.5 bg-border-strong">
-          <Rail data-pipeline-rail className="h-full origin-left bg-mint" style={{ scaleX: progress }} />
+        <div ref={railRef} aria-hidden="true" className="relative mb-4 h-0.5 bg-border-strong">
+          <Rail data-pipeline-rail className="h-full origin-left bg-signal" style={{ scaleX: progress }} />
+          <RailBall data-rail-ball className="absolute -top-[9px] left-0 h-5 w-5" style={{ x: ballX, rotate: ballSpin }}>
+            <Ball className="h-full w-full" />
+          </RailBall>
         </div>
 
         <ol ref={listRef} className="grid grid-cols-2 gap-2 lg:grid-cols-6">

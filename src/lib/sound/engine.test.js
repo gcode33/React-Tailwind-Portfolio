@@ -25,8 +25,6 @@ describe("before opt-in", () => {
   it("creates no audio, whatever else happens on the page", () => {
     const sound = engine();
     sound.effect("jump");
-    sound.openExternalPlayer("song");
-    sound.closeExternalPlayer();
 
     expect(createContext).not.toHaveBeenCalled();
     expect(effects.jump).not.toHaveBeenCalled();
@@ -119,18 +117,6 @@ describe("effects", () => {
     ctx.currentTime += 0.1;
     sound.effect("tick");
     expect(effects.tick).toHaveBeenCalledTimes(2);
-  });
-
-  it("stay quiet while Apple's player is open, and come back after", () => {
-    const sound = engine();
-    sound.toggle();
-    sound.openExternalPlayer("breeze");
-    sound.effect("jump");
-    expect(effects.jump).not.toHaveBeenCalled();
-
-    sound.closeExternalPlayer();
-    sound.effect("jump");
-    expect(effects.jump).toHaveBeenCalledTimes(1);
   });
 
   it("stay quiet in a hidden tab", () => {

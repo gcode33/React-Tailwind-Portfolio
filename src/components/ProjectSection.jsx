@@ -8,7 +8,7 @@ import { profile, projects } from "@/data/profile";
 const tick = () => sound.effect("tick");
 
 export const ProjectSection = () => (
-  <section id="projects" className="border-y border-border bg-subtle py-20 md:py-24">
+  <section id="projects" className="bg-subtle py-20 md:py-24">
     <div className="container">
       <SectionHeading
         note="projects"

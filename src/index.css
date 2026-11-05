@@ -2,9 +2,9 @@
 
 /* Self-hosted so no third party is involved in the first paint. */
 @font-face {
-  font-family: "Anton";
-  src: url("/fonts/anton-latin-400.woff2") format("woff2");
-  font-weight: 400;
+  font-family: "Outfit";
+  src: url("/fonts/outfit-latin-wght.woff2") format("woff2");
+  font-weight: 100 900;
   font-display: swap;
 }
 
@@ -25,11 +25,11 @@
 /* System fonts resized to the width of the real ones, so text wraps the same way before and
    after they load and nothing jumps. Numbers measured against Arial and Courier New. */
 @font-face {
-  font-family: "Anton Fallback";
+  font-family: "Outfit Fallback";
   src: local("Arial"), local("Roboto");
-  size-adjust: 90.3%;
-  ascent-override: 130.68%;
-  descent-override: 36.55%;
+  size-adjust: 92.98%;
+  ascent-override: 107.55%;
+  descent-override: 27.96%;
   line-gap-override: 0%;
 }
 
@@ -54,26 +54,27 @@
 @theme {
   --font-sans: "Instrument Sans", "Instrument Sans Fallback", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: "JetBrains Mono", "JetBrains Mono Fallback", ui-monospace, SFMono-Regular, Menlo, monospace;
-  --font-display: "Anton", "Anton Fallback", Impact, "Arial Narrow", sans-serif;
+  --font-display: "Outfit", "Outfit Fallback", sans-serif;
 
-  /* Ground */
-  --color-background: #0c1410;
-  --color-subtle: #13201a;
-  --color-border: #2a3a31;
-  --color-border-strong: #3b4e43;
+  /* Near black, like space */
+  --color-background: #05070a;
+  --color-subtle: #0b1016;
+  --color-border: #1f2831;
+  --color-border-strong: #33404c;
 
   /* Text and lines */
-  --color-foreground: #eef1e4;
-  --color-soft: #d8dfd2;
-  --color-muted: #a9b5a6;
+  --color-foreground: #f5f7fa;
+  --color-soft: #ccd4dc;
+  --color-muted: #9aa6b2;
 
-  /* Blue for fills, its tint for accents on dark ground */
+  /* Blue for the ball and transitions, its tint for accents */
   --color-brand: #034694;
   --color-brand-hover: #0556b5;
   --color-accent: #7fb2ff;
+  --color-signal: #a8cdff;
 
-  /* Engineering */
-  --color-mint: #8fe3cf;
+  /* Code diff */
+  --color-added: #8fe3cf;
   --color-removed: #ffb4a6;
 }
 
@@ -102,7 +103,7 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-mint);
+    outline: 2px solid var(--color-signal);
     outline-offset: 3px;
   }
 
@@ -130,7 +131,8 @@
 /* Condensed stadium-board type for headings. */
 @utility display {
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: 300;
+  letter-spacing: 0.005em;
   text-transform: uppercase;
 }
 
@@ -147,11 +149,17 @@
 }
 
 @utility btn-primary {
-  @apply btn bg-brand text-white hover:bg-brand-hover;
+  @apply btn bg-foreground font-mono text-background hover:bg-accent;
 }
 
 @utility btn-ghost {
-  @apply btn border border-foreground text-foreground hover:bg-foreground hover:text-background;
+  @apply btn border border-foreground/50 text-foreground hover:bg-foreground hover:text-background;
+}
+
+/* A faint dot grid behind everything, drawn once. */
+body {
+  background-image: radial-gradient(color-mix(in oklab, var(--color-foreground) 7%, transparent) 1px, transparent 1px);
+  background-size: 32px 32px;
 }
 
 @media (prefers-reduced-motion: reduce) {

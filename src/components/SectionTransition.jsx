@@ -2,8 +2,11 @@ import { useEffect, useRef } from "react";
 import { useReducedMotion } from "motion/react";
 import { getJumpTarget } from "@/lib/sectionJump";
 import { sound } from "@/lib/sound";
+import { Ball } from "./Graphics";
 
-const WIPE_MS = 350;
+const WIPE_MS = 300;
+const STAGGER_MS = 26;
+const SLATS = 6;
 const EXPO_IN = "cubic-bezier(0.7, 0, 0.84, 0)";
 const EXPO_OUT = "cubic-bezier(0.16, 1, 0.3, 1)";
 
@@ -18,13 +21,14 @@ const landOn = (id) => {
   section.focus({ preventScroll: true });
 };
 
-// On a section link click, a panel wipes over the screen, the page jumps while it's fully
-// covered, and the panel wipes away.
+// On a section link click, slats sweep up across the screen with a ball crossing them, the page
+// jumps while it's fully covered, and the slats carry on upward to reveal the new section.
 // Uses the browser's built-in Web Animations API, so it adds nothing to the download.
 export const SectionTransition = () => {
   const reduced = useReducedMotion();
   const rootRef = useRef(null);
-  const panelRef = useRef(null);
+  const slatsRef = useRef([]);
+  const ballRef = useRef(null);
   const run = useRef({ active: false, covered: false, target: null, animations: [] });
 
   useEffect(() => {
@@ -39,8 +43,9 @@ export const SectionTransition = () => {
       }
 
       const root = rootRef.current;
-      const panel = panelRef.current;
-      if (!root || !panel?.animate) {
+      const slats = slatsRef.current.filter(Boolean);
+      const ball = ballRef.current;
+      if (!root || !slats[0]?.animate || !ball?.animate) {
         landOn(id);
         return;
       }
@@ -50,26 +55,34 @@ export const SectionTransition = () => {
       sound.effect("jump");
       root.hidden = false;
       try {
-        panel.style.transformOrigin = "left";
-        const cover = panel.animate([{ transform: "scaleX(0)" }, { transform: "scaleX(1)" }], {
-          duration: WIPE_MS,
-          easing: EXPO_IN,
-          fill: "forwards",
-        });
-        state.animations = [cover];
-        await cover.finished;
+        const sweep = (from, to, easing) =>
+          slats.map((slat, i) =>
+            slat.animate([{ transform: from }, { transform: to }], {
+              duration: WIPE_MS,
+              delay: i * STAGGER_MS,
+              easing,
+              fill: "forwards",
+            })
+          );
+        const total = (WIPE_MS + (slats.length - 1) * STAGGER_MS) * 2;
+        const flight = ball.animate(
+          [
+            { transform: "translateX(0) rotate(0deg)" },
+            { transform: "translateX(calc(100vw + 6rem)) rotate(1080deg)" },
+          ],
+          { duration: total, easing: "cubic-bezier(0.5, 0, 0.5, 1)", fill: "forwards" }
+        );
+
+        const cover = sweep("translateY(100%)", "translateY(0)", EXPO_IN);
+        state.animations = [flight, ...cover];
+        await Promise.all(cover.map((animation) => animation.finished));
 
         state.covered = true;
         landOn(state.target);
 
-        panel.style.transformOrigin = "right";
-        const uncover = panel.animate([{ transform: "scaleX(1)" }, { transform: "scaleX(0)" }], {
-          duration: WIPE_MS,
-          easing: EXPO_OUT,
-          fill: "forwards",
-        });
-        state.animations.push(uncover);
-        await uncover.finished;
+        const uncover = sweep("translateY(0)", "translateY(-100%)", EXPO_OUT);
+        state.animations.push(...uncover);
+        await Promise.all([flight.finished, ...uncover.map((animation) => animation.finished)]);
       } catch {
         // Cancelled on unmount. Nothing to clean up beyond the reset below.
       } finally {
@@ -103,9 +116,24 @@ export const SectionTransition = () => {
       hidden
       className="pointer-events-none fixed inset-0 z-50 overflow-hidden print:hidden"
     >
-      {/* Starts collapsed with an inline transform. Tailwind's scale-x-0 sets the separate CSS
-          `scale` property, which would stay at zero and hide the panel however `transform` animates. */}
-      <div ref={panelRef} className="absolute inset-0 bg-brand" style={{ transform: "scaleX(0)" }} />
+      <div className="absolute inset-0 grid grid-cols-6">
+        {/* Start out of sight with an inline transform. Tailwind's translate classes set the separate
+            CSS `translate` property, which would stay in place however `transform` animates. */}
+        {Array.from({ length: SLATS }, (_, i) => (
+          <div
+            key={i}
+            ref={(node) => {
+              slatsRef.current[i] = node;
+            }}
+            data-wipe-slat
+            className="h-full bg-brand"
+            style={{ transform: "translateY(100%)" }}
+          />
+        ))}
+      </div>
+      <div ref={ballRef} data-wipe-ball className="absolute top-1/2 -left-12 -mt-5 h-10 w-10">
+        <Ball className="h-full w-full" fill="#fff" mark="var(--color-brand)" />
+      </div>
     </div>
   );
 };

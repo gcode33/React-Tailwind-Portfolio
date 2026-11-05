@@ -35,7 +35,7 @@ const browserStorage = () => {
  * Plays the site's sound effects and owns the rules around them:
  *   - Nothing is created until the visitor opts in.
  *   - A remembered "on" only offers to resume. It never starts by itself.
- *   - Effects stay quiet while Apple's player is open, or while the tab is hidden.
+ *   - Effects stay quiet while the tab is hidden.
  *
  * Status is one of: off, on, unavailable (this browser has no Web Audio).
  *
@@ -52,7 +52,6 @@ export const createSoundEngine = ({
   let snapshot = {
     status: "off",
     resumable: readStorage(storage, PREFERENCE_KEY) === "on",
-    externalPlayer: null,
   };
   let ctx = null;
   let lastTickAt = -Infinity;
@@ -63,7 +62,7 @@ export const createSoundEngine = ({
   };
 
   const effect = (name) => {
-    if (snapshot.status !== "on" || snapshot.externalPlayer || doc.hidden) return;
+    if (snapshot.status !== "on" || doc.hidden) return;
     // Phones can suspend audio while the page is in the background.
     if (ctx.state === "suspended") ctx.resume?.();
     const now = ctx.currentTime;
@@ -100,8 +99,5 @@ export const createSoundEngine = ({
     },
 
     effect,
-
-    openExternalPlayer: (key) => set({ externalPlayer: key }),
-    closeExternalPlayer: () => set({ externalPlayer: null }),
   };
 };
