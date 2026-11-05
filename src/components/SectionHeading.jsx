@@ -15,7 +15,7 @@ export const SectionHeading = ({ title, description, note }) => {
   return (
     <div ref={ref} className="mb-10 max-w-3xl md:mb-14">
       <ScrubIn y={40}>
-        <h2 className="display text-5xl leading-[1.05] md:text-[56px]">
+        <h2 className="display text-[clamp(2.5rem,13vw,3rem)] leading-[1.05] md:text-[56px]">
           <DecodeText text={title} />
         </h2>
         {description && <p className="mt-4 text-soft">{description}</p>}

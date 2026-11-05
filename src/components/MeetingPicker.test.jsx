@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { MeetingPicker } from "./MeetingPicker";
 
@@ -7,6 +7,22 @@ const today = new Date(2026, 10, 4);
 afterEach(cleanup);
 
 describe("MeetingPicker", () => {
+  it("brings the times, then the send buttons, on screen as each one appears", () => {
+    const scrollIntoView = vi.fn();
+    window.HTMLElement.prototype.scrollIntoView = scrollIntoView;
+    render(<MeetingPicker today={today} />);
+    expect(scrollIntoView).not.toHaveBeenCalled();
+
+    fireEvent.click(screen.getByRole("button", { name: /Thursday, November 5/ }));
+    expect(scrollIntoView).toHaveBeenCalledTimes(1);
+    expect(scrollIntoView.mock.contexts[0].contains(screen.getByRole("button", { name: "2:00 PM" }))).toBe(true);
+
+    fireEvent.click(screen.getByRole("button", { name: "2:00 PM" }));
+    expect(scrollIntoView).toHaveBeenCalledTimes(2);
+    expect(scrollIntoView.mock.contexts[1].contains(screen.getByRole("link", { name: /Google Calendar/ }))).toBe(true);
+    delete window.HTMLElement.prototype.scrollIntoView;
+  });
+
   it("shows the calendar straight away, with past days and weekends unavailable", () => {
     render(<MeetingPicker today={today} />);
     expect(screen.getByRole("heading", { name: "November 2026" })).toBeTruthy();
