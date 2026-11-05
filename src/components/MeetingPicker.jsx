@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CalendarPlus, ChevronLeft, ChevronRight, Mail } from "lucide-react";
 import { SLOTS, emailRequestUrl, formatDay, formatSlot, googleInviteUrl, isBookable, monthGrid, toDateKey } from "@/lib/meeting";
 import { profile } from "@/data/profile";
@@ -10,6 +10,16 @@ export const MeetingPicker = ({ today = new Date() }) => {
   const [view, setView] = useState({ year: today.getFullYear(), month: today.getMonth() });
   const [day, setDay] = useState(null);
   const [time, setTime] = useState(null);
+  const timesRef = useRef(null);
+  const actionsRef = useRef(null);
+
+  // On a phone these appear below the calendar, off screen, so bring each one into view.
+  useEffect(() => {
+    if (day) timesRef.current?.scrollIntoView?.({ block: "nearest" });
+  }, [day]);
+  useEffect(() => {
+    if (time) actionsRef.current?.scrollIntoView?.({ block: "nearest" });
+  }, [time]);
 
   const cells = monthGrid(view.year, view.month);
   const title = new Date(view.year, view.month, 1).toLocaleDateString("en-CA", { month: "long", year: "numeric" });
@@ -75,7 +85,7 @@ export const MeetingPicker = ({ today = new Date() }) => {
         </div>
       </div>
 
-      <div className="flex flex-col gap-3">
+      <div ref={timesRef} className="flex flex-col gap-3">
         <p aria-live="polite" className="font-mono text-sm tracking-[0.08em] uppercase">
           {day ? formatDay(day) : "Pick a day"}
         </p>
@@ -100,7 +110,7 @@ export const MeetingPicker = ({ today = new Date() }) => {
         )}
 
         {pick && (
-          <div data-meeting-actions className="mt-2 flex flex-col gap-2 border-t border-border pt-4">
+          <div ref={actionsRef} data-meeting-actions className="mt-2 flex flex-col gap-2 border-t border-border pt-4">
             <a href={googleInviteUrl(pick)} target="_blank" rel="noopener noreferrer" className="btn-primary">
               <CalendarPlus aria-hidden="true" className="h-4 w-4" />
               Send a Google Calendar invite

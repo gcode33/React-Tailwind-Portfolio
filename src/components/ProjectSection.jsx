@@ -26,7 +26,7 @@ export const ProjectSection = () => (
               rel="noopener noreferrer"
               onMouseEnter={tick}
               onFocus={tick}
-              className="group relative grid grid-cols-[2.75rem_minmax(0,1fr)] items-baseline gap-x-4 gap-y-2 py-5 after:absolute after:inset-x-0 after:-bottom-px after:h-px after:origin-left after:scale-x-0 after:bg-accent after:transition-transform after:duration-500 after:ease-out hover:after:scale-x-100 focus-visible:after:scale-x-100 md:grid-cols-[3.5rem_minmax(0,1.1fr)_minmax(0,1.6fr)_4rem] md:gap-x-6"
+              className="group relative grid grid-cols-[2.75rem_minmax(0,1fr)] items-baseline gap-x-4 gap-y-2 py-5 after:absolute after:inset-x-0 after:-bottom-px after:h-px after:origin-left after:scale-x-0 after:bg-accent after:transition-transform after:duration-500 after:ease-out hover:after:scale-x-100 focus-visible:after:scale-x-100 md:grid-cols-[3.5rem_minmax(0,1.3fr)_minmax(0,1.4fr)_4rem] md:gap-x-6"
             >
               <span className="relative font-mono text-sm text-accent">
                 <span className="transition-opacity duration-200 group-hover:opacity-0 group-focus-visible:opacity-0">
@@ -37,7 +37,7 @@ export const ProjectSection = () => (
                   className="absolute top-0.5 left-0 h-4 w-4 opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100"
                 />
               </span>
-              <h3 className="display text-[32px] leading-[1.15] transition-[color,translate] duration-300 ease-out group-hover:translate-x-2 group-hover:text-accent group-focus-visible:translate-x-2 group-focus-visible:text-accent">
+              <h3 className="display text-[clamp(1.25rem,6.4vw,2rem)] leading-[1.15] md:text-[clamp(1.4rem,3vw,2rem)] transition-[color,translate] duration-300 ease-out group-hover:translate-x-2 group-hover:text-accent group-focus-visible:translate-x-2 group-focus-visible:text-accent">
                 {project.title}
               </h3>
               <div className="col-start-2 md:col-start-auto">

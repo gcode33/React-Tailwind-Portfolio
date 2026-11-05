@@ -63,11 +63,19 @@ export const Navbar = () => {
     };
     const handleResize = (event) => event.matches && close();
 
+    // The page behind stays out of reach of the keyboard and screen readers too.
+    const behind = document.querySelectorAll("main, footer");
+    behind.forEach((element) => {
+      element.inert = true;
+    });
     document.body.style.overflow = "hidden";
     document.addEventListener("keydown", handleKey);
     desktop.addEventListener("change", handleResize);
 
     return () => {
+      behind.forEach((element) => {
+        element.inert = false;
+      });
       document.body.style.overflow = "";
       document.removeEventListener("keydown", handleKey);
       desktop.removeEventListener("change", handleResize);
@@ -79,7 +87,7 @@ export const Navbar = () => {
       <header
         className={cn(
           "fixed inset-x-0 top-0 z-40 transition-all duration-300",
-          isScrolled
+          isScrolled || isMenuOpen
             ? "border-b border-border bg-background/90 py-3 backdrop-blur-lg"
             : "border-b border-transparent py-5"
         )}
@@ -138,12 +146,13 @@ export const Navbar = () => {
       </header>
 
       {/* Mobile menu (outside the header so the header's backdrop-filter doesn't clip it).
-          `inert` keeps the hidden menu out of the tab order and away from screen readers. */}
+          `inert` keeps the hidden menu out of the tab order and away from screen readers.
+          It scrolls on short screens, and its bottom padding clears the dock. */}
       <div
         id="mobile-menu"
         inert={!isMenuOpen}
         className={cn(
-          "fixed inset-0 z-30 bg-background/95 pt-20 backdrop-blur-lg transition-opacity duration-300 lg:hidden",
+          "fixed inset-0 z-30 overflow-y-auto overscroll-contain scroll-pt-20 scroll-pb-20 bg-background/95 pt-20 pb-20 backdrop-blur-lg transition-opacity duration-300 lg:hidden",
           isMenuOpen ? "opacity-100" : "pointer-events-none opacity-0"
         )}
       >

@@ -9,7 +9,7 @@ import { experience, profile } from "@/data/profile";
 
 const firstYear = Math.min(...experience.map((job) => new Date(job.start).getUTCFullYear()));
 
-const linkClass = "inline-flex min-h-11 items-center gap-2 break-all text-accent underline-offset-4 hover:underline";
+const linkClass = "inline-flex min-h-11 items-center gap-2 text-accent [overflow-wrap:anywhere] underline-offset-4 hover:underline";
 
 export const ContactSection = () => {
   const [copied, setCopied] = useState(false);
@@ -40,8 +40,8 @@ export const ContactSection = () => {
     <section ref={sectionRef} id="contact" className="relative overflow-hidden py-20 md:py-24">
       <GoalNet ref={netRef} />
       <div className="container relative grid items-center gap-12 lg:grid-cols-[1.3fr_1fr] lg:gap-14">
-        <ScrubIn y={48} className="flex flex-col gap-4">
-          <h2 className="display text-[clamp(3.5rem,8vw,6.5rem)] leading-none">
+        <ScrubIn y={48} className="flex min-w-0 flex-col gap-4">
+          <h2 className="display text-[clamp(2.75rem,14.5vw,3.5rem)] leading-none md:text-[clamp(3.5rem,8vw,6.5rem)]">
             <DecodeText text="Let's work together." />
           </h2>
           <p className="text-soft">Hiring, or want to talk about software? Send me a note.</p>
@@ -66,7 +66,7 @@ export const ContactSection = () => {
           </div>
         </ScrubIn>
 
-        <ScrubIn y={88} className="flex flex-col gap-3 border border-foreground bg-subtle p-6">
+        <ScrubIn y={88} className="flex min-w-0 flex-col gap-3 border border-foreground bg-subtle p-6">
           <div className="flex justify-between gap-3 font-mono text-xs text-muted">
             <span>CONTACT</span>
             <span>BUILDING SINCE {firstYear}</span>

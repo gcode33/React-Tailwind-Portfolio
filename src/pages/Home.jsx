@@ -16,12 +16,13 @@ import { PassBand } from "@/components/PassBand";
 import { SliceReveal } from "@/components/SliceReveal";
 import { IntroCurtain } from "@/components/IntroCurtain";
 import { CursorRing } from "@/components/CursorRing";
+import { idFromHash } from "@/lib/sectionJump";
 
 export const Home = () => {
   // The browser tries to jump to a URL hash (e.g. /#projects) before React has rendered
   // the sections, so redo the jump once they exist.
   useEffect(() => {
-    const id = decodeURIComponent(window.location.hash.slice(1));
+    const id = idFromHash(window.location.hash);
     if (id) document.getElementById(id)?.scrollIntoView({ behavior: "instant" });
   }, []);
 

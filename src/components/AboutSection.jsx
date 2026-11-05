@@ -16,7 +16,7 @@ export const AboutSection = () => (
   <section id="about" className="py-20 md:py-24">
     <div className="container grid gap-12 lg:grid-cols-[1.3fr_1fr] lg:gap-14">
       <Reveal className="flex flex-col gap-4 text-soft">
-        <h2 className="display text-5xl leading-[1.05] text-foreground md:text-[56px]">
+        <h2 className="display text-[clamp(2.5rem,13vw,3rem)] leading-[1.05] text-foreground md:text-[56px]">
           <ScrollWords text="Building reliable software, end to end." />
         </h2>
         <p>
@@ -61,7 +61,7 @@ export const AboutSection = () => (
           {stats.map((stat, i) => (
             <div key={stat.label} className={`flex items-baseline gap-4 p-4 ${i ? "border-t border-border" : ""}`}>
               <dt className="order-2 text-sm text-muted">{stat.label}</dt>
-              <dd className="display order-1 min-w-20 text-4xl">{stat.value}</dd>
+              <dd className="display order-1 min-w-24 text-4xl">{stat.value}</dd>
             </div>
           ))}
         </dl>

@@ -6,7 +6,7 @@ import { sound, useSound } from "@/lib/sound";
 const message = ({ status, resumable }) => {
   if (status === "on") return "Sound effects on";
   if (status === "unavailable") return "Sound isn't available in this browser";
-  return resumable ? "You had this on. Press to resume." : "Off until you choose";
+  return resumable ? "Sound was on. Press to resume." : "Sound off until you choose";
 };
 
 const SECTIONS = [

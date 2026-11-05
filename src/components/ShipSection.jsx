@@ -35,7 +35,7 @@ const Stage = ({ stage, index, passed, progress }) => {
           className={`h-3.5 w-3.5 transition-opacity duration-300 ${passed ? "opacity-100" : "opacity-0"}`}
         />
       </span>
-      <h3 className="display text-[26px] leading-[1.15]">{stage.name}</h3>
+      <h3 className="display text-[clamp(1.25rem,6.6vw,1.625rem)] leading-[1.15]">{stage.name}</h3>
       <p className="text-sm leading-snug text-soft">{stage.detail}</p>
     </StageItem>
   );

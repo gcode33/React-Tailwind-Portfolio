@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import { getJumpTarget } from "./sectionJump";
+import { getJumpTarget, idFromHash } from "./sectionJump";
 
 const setup = (attrs = {}) => {
   const a = document.createElement("a");
@@ -48,5 +48,21 @@ describe("getJumpTarget", () => {
 
   it("respects a click another handler already handled", () => {
     expect(getJumpTarget(click({ defaultPrevented: true }), setup(), { reduced: false })).toBeNull();
+  });
+});
+
+describe("idFromHash", () => {
+  it("reads the section out of a URL hash", () => {
+    expect(idFromHash("#projects")).toBe("projects");
+    expect(idFromHash("#a%20b")).toBe("a b");
+  });
+
+  it("returns null when there's no hash", () => {
+    expect(idFromHash("")).toBeNull();
+    expect(idFromHash("#")).toBeNull();
+  });
+
+  it("returns null instead of throwing on a malformed hash, which used to blank the whole site", () => {
+    expect(idFromHash("#%E0%A4%A")).toBeNull();
   });
 });
